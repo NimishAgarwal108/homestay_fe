@@ -1,100 +1,123 @@
-"use client";
-
-import { cn } from "@/lib/utils";
 import React from "react";
 
-/* =========================
-   Typography Variants
-========================= */
+/* Utility */
+export const cn = (...classes: (string | boolean | undefined)[]) =>
+  classes.filter(Boolean).join(" ");
 
-export const typographyVariants = {
-  h1: "font-primary text-4xl md:text-5xl font-bold text-slate-800 leading-tight tracking-tight animate-fadeSlide",
-  h2: "font-primary text-3xl font-semibold text-indigo-800 mt-6 mb-3 tracking-tight",
-  h3: "font-primary text-xl font-semibold text-gray-600 mb-3",
-  h4: "font-primary text-2xl font-bold text-slate-800 leading-tight tracking-tight",
+/* Types */
+export type TypographyVariant =
+  | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "paragraph"
+  | "muted"
+  | "small"
+  | "label"
+  | "brand";
 
-  brand:
-    "font-primary text-2xl font-bold text-indigo-600 tracking-wide hover:text-indigo-700 transition-all",
+export type TextColor =
+  | "default"
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "offWhite"
+  | "cream"
+  | "white";
 
-  nav: "font-secondary text-base font-medium text-gray-700 hover:text-indigo-600",
-  navActive:
-    "font-secondary text-base font-semibold text-indigo-600 border-b-2 border-indigo-600",
+export type Weight = "normal" | "medium" | "semibold" | "bold" | "extrabold";
+export type Align = "left" | "center" | "right";
 
-  body: "font-primary text-base text-gray-700 leading-relaxed",
-  bodyMuted: "font-primary text-sm text-gray-500",
-
-  paraPrimary:
-    "font-primary text-base md:text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto",
-  paraSecondary:
-    "font-primary text-base text-gray-700 leading-relaxed opacity-90",
+/* Styles */
+const typographyVariants: Record<TypographyVariant, string> = {
+  h1: "scroll-m-20 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight",
+  h2: "scroll-m-20 text-3xl md:text-4xl font-semibold tracking-tight",
+  h3: "scroll-m-20 text-2xl md:text-3xl font-semibold tracking-tight",
+  h4: "scroll-m-20 text-xl md:text-2xl font-semibold tracking-tight",
+  paragraph: "leading-7 text-base md:text-lg",
+  muted: "text-sm md:text-base opacity-80",
+  small: "text-xs md:text-sm font-medium",
+  label: "text-xs md:text-sm font-semibold tracking-wide uppercase",
+  brand: "text-2xl md:text-3xl font-bold tracking-wide",
 };
 
-/* =========================
-   Background Color Themes
-========================= */
-
-const bgThemes = {
-  light: "bg-[#eff1ee]",
-  dark: "bg-[#18465a] text-white",
-  olive: "bg-[#63610c] text-white",
-  sand: "bg-[#b58c5b] text-white",
+const textColors: Record<TextColor, string> = {
+  default: "text-slate-800",
+  primary: "text-amber-900",
+  secondary: "text-stone-700",
+  accent: "text-emerald-700",
+  offWhite: "text-stone-50",
+  cream: "text-amber-50",
+  white: "text-white",
 };
 
-/* =========================
-   Types
-========================= */
+const weights: Record<Weight, string> = {
+  normal: "font-normal",
+  medium: "font-medium",
+  semibold: "font-semibold",
+  bold: "font-bold",
+  extrabold: "font-extrabold",
+};
 
-type TypographyVariant = keyof typeof typographyVariants;
-type BgTheme = keyof typeof bgThemes;
-type LayoutVariant = "one" | "two" | "three";
+const aligns: Record<Align, string> = {
+  left: "text-left",
+  center: "text-center",
+  right: "text-right",
+};
 
-interface TypographyProps
-  extends React.HTMLAttributes<HTMLElement> {
- as?: React.ElementType;
+/* Props */
+export interface TypographyProps {
   variant?: TypographyVariant;
-  bgTheme?: BgTheme;
-  layout?: LayoutVariant;
+  textColor?: TextColor;
+  weight?: Weight;
+  align?: Align;
+  as?: React.ElementType;
+  className?: string;
   children: React.ReactNode;
+  [key: string]: any;
 }
 
-/* =========================
-   Layout Wrapper Styles
-========================= */
-
-const layoutStyles: Record<LayoutVariant, string> = {
-  one: "py-12",
-  two: "py-16 flex justify-center",
-  three: "py-20 flex items-center justify-center",
-};
-
-/* =========================
-   Typography Component
-========================= */
-
-export function Typography({
-  as: Component = "span",
-  variant = "body",
-  bgTheme = "light",
-  layout = "one",
-  className,
+/* Component */
+export const Typography: React.FC<TypographyProps> = ({
+  variant = "paragraph",
+  textColor = "default",
+  weight = "normal",
+  align = "left",
+  as,
+  className = "",
   children,
   ...props
-}: TypographyProps) {
-  return (
-    /* OUTER DIV */
-    <div className={cn("w-full", bgThemes[bgTheme], layoutStyles[layout])}>
-      {/* MIDDLE DIV */}
-      <div className="container mx-auto px-4">
-        {/* INNER DIV */}
-        <div className="text-center">
-          <Component
-            className={cn(typographyVariants[variant], className)}
-            {...props}
-          >
-            {children}
-          </Component>
-        </div>
-      </div>
-    </div>
+}) => {
+  const Component =
+    as ||
+    (variant === "h1"
+      ? "h1"
+      : variant === "h2"
+      ? "h2"
+      : variant === "h3"
+      ? "h3"
+      : variant === "h4"
+      ? "h4"
+      : variant === "brand" ||
+        variant === "small" ||
+        variant === "label" ||
+        variant === "muted"
+      ? "span"
+      : "p");
+
+  const classes = cn(
+    typographyVariants[variant],
+    textColors[textColor],
+    weights[weight],
+    aligns[align],
+    className
   );
-}
+
+  return (
+    <Component className={classes} {...props}>
+      {children}
+    </Component>
+  );
+};
+
+export default Typography;
