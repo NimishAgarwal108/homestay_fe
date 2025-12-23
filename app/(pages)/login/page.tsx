@@ -1,8 +1,5 @@
+import LogIn from "@/components/custom/LogIn";
 
-function page(){
-  return(
-    <>
-    <></>
-    </>
-  );
-}export default page;
+export default function LoginPage() {
+  return <LogIn />;
+}

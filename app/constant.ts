@@ -62,14 +62,14 @@ export const RoomsType=  [
    "/food/image5.jpg",
    "/food/image6.jpg",
    "/food/image7.jpg",
-   "/food/image8.jpg",
+   "/food/image88.jpg",
  ];
 
  export const heroImages = [
   "/hero/img1.jpg",
   "/hero/img2.jpg",
   "/hero/img3.jpg",
-  "/hero/img4.jpg",
+  "/hero/img44.jpg",
 ];
 
 export const galleryImages=[
@@ -80,5 +80,5 @@ export const galleryImages=[
   "/gallery/pop5.jpg",
   "/gallery/pop6.jpg",
   "/gallery/pop7.jpg",
-  "/gallery/pop8.jpg",
+  "/gallery/pop88.jpg",
 ]

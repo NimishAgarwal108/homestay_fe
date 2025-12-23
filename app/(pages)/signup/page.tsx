@@ -1,6 +1,5 @@
+import SignUp from "@/components/custom/SignUp";
 
-function page(){
-  return(
-    <></>
-  );
+export default function page(){
+  return <SignUp/>;
 }
