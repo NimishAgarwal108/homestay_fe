@@ -10,22 +10,20 @@ export function Gallery() {
       {/* Background collage */}
       <FloatingImageCollage />
 
-      {/* Centered text */}
-      <div className="relative z-20 flex items-center justify-center h-[60px] md:h-[120px]">
-        <div className="text-center px-6">
-          <Typography
-            variant="h2"
-            textColor="primary"
-            weight="bold"
-            align="center"
-            className="mb-2"
-          >
-            Memories in the Making
-          </Typography>
-          <Typography variant="paragraph" textColor="secondary" align="center">
-            Moments captured from our beautiful homestay
-          </Typography>
-        </div>
+      {/* Text overlay */}
+      <div className="absolute top-16 md:top-24 left-1/2 -translate-x-1/2 z-20 text-center px-6">
+        <Typography
+          variant="h2"
+          textColor="primary"
+          weight="bold"
+          align="center"
+          className="mb-2"
+        >
+          Memories in the Making
+        </Typography>
+        <Typography variant="paragraph" textColor="secondary" align="center">
+          Moments captured from our beautiful homestay
+        </Typography>
       </div>
 
       {/* Gradient overlay */}
