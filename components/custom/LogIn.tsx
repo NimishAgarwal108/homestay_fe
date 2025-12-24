@@ -8,9 +8,8 @@ import { Eye, EyeOff, Lock, Mail, Mountain } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-
 function Login() {
-  const router=useRouter();
+  const router = useRouter();
   const [formData, setFormData] = useState({ 
     email: '', 
     password: '',
@@ -19,15 +18,16 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-stone-100 flex items-center justify-center p-4 relative overflow-hidden">
-      <div className="absolute top-20 right-20 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-20 w-80 h-80 bg-orange-200/20 rounded-full blur-3xl" />
+    <div className="min-h-screen bg-gradient-to-br from-[#BFC7DE]/50 via-[#C9A177]/30 to-[#BFC7DE]/50 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Decorative blobs */}
+      <div className="absolute top-10 md:top-20 right-10 md:right-20 w-64 md:w-96 h-64 md:h-96 bg-[#7570BC]/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-10 md:bottom-20 left-10 md:left-20 w-56 md:w-80 h-56 md:h-80 bg-[#C9A177]/20 rounded-full blur-3xl" />
       
-      <Card className="w-full max-w-md shadow-2xl relative z-10 border-2 border-amber-100 bg-white/90 backdrop-blur-md">
-        <CardHeader className="space-y-4 pb-8">
+      <Card className="w-full max-w-md md:max-w-lg shadow-2xl relative z-10 border-2 border-[#BFC7DE] bg-white/80 backdrop-blur-md p-4 md:p-6">
+        <CardHeader className="space-y-4 pb-6 md:pb-8">
           <div className="flex justify-center mb-2">
-            <div className="w-20 h-20 bg-gradient-to-br from-amber-600 via-orange-600 to-amber-700 rounded-full flex items-center justify-center shadow-lg">
-              <Mountain className="w-11 h-11 text-white" />
+            <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-[#7570BC] via-[#BFC7DE] to-[#C9A177] rounded-full flex items-center justify-center shadow-lg">
+              <Mountain className="w-9 h-9 md:w-11 md:h-11 text-white" />
             </div>
           </div>
           
@@ -43,7 +43,8 @@ function Login() {
         </CardHeader>
         
         <CardContent>
-          <div className="space-y-6">
+          <div className="space-y-4 md:space-y-6">
+            {/* Email */}
             <div className="space-y-2">
               <Label htmlFor="email">
                 <Typography variant="label" textColor="secondary" weight="semibold">
@@ -51,18 +52,19 @@ function Login() {
                 </Typography>
               </Label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-600" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#7570BC]" />
                 <Input
                   id="email"
                   type="email"
                   placeholder="your.email@example.com"
-                  className="pl-11 h-12 border-2 border-amber-100 focus:border-amber-400"
+                  className="pl-11 h-12 border-2 border-[#BFC7DE] focus:border-[#7570BC]"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />
               </div>
             </div>
 
+            {/* Password */}
             <div className="space-y-2">
               <Label htmlFor="password">
                 <Typography variant="label" textColor="secondary" weight="semibold">
@@ -70,30 +72,31 @@ function Login() {
                 </Typography>
               </Label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-amber-600" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#7570BC]" />
                 <Input
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
-                  className="pl-11 pr-11 h-12 border-2 border-amber-100"
+                  className="pl-11 pr-11 h-12 border-2 border-[#BFC7DE] focus:border-[#7570BC]"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-amber-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7570BC]"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
+            {/* Remember Me / Forgot Password */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input 
                   type="checkbox" 
-                  className="w-4 h-4 rounded border-2 border-amber-300 text-amber-600"
+                  className="w-4 h-4 rounded border-2 border-[#BFC7DE] text-[#7570BC]"
                   checked={formData.rememberMe}
                   onChange={(e) => setFormData({ ...formData, rememberMe: e.target.checked })}
                 />
@@ -107,33 +110,36 @@ function Login() {
                 variant="small" 
                 textColor="accent" 
                 weight="semibold"
-                className="hover:text-amber-800"
+                className="hover:text-[#C59594]"
               >
                 Forgot password?
               </Typography>
             </div>
 
+            {/* Sign In */}
             <Button 
-              className="w-full h-12 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
+              className="w-full h-12 bg-[#7570BC] hover:bg-[#C59594] text-white transition-all"
             >
               Sign In
             </Button>
 
+            {/* Create Account */}
             <div className="text-center">
               <Typography variant="paragraph" textColor="secondary">
                 Don't have an account?{' '}
                 <button
                   onClick={() => router.push('/SignUp')}
-                  className="text-amber-700 hover:text-amber-800 font-semibold"
+                  className="text-[#7570BC] hover:text-[#C59594] font-semibold"
                 >
                   Create Account
                 </button>
               </Typography>
             </div>
 
+            {/* Back to Home */}
             <Button
               variant="outline"
-              className="w-full h-12 border-2 border-amber-300 text-amber-900 hover:bg-amber-50"
+              className="w-full h-12 border-2 border-[#BFC7DE] text-[#7570BC] hover:bg-[#BFC7DE]/20"
               onClick={() => router.push("/")}
             >
               <Mountain className="w-5 h-5 mr-2" />
@@ -145,4 +151,5 @@ function Login() {
     </div>
   );
 }
+
 export default Login;

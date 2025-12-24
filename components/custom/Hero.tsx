@@ -11,23 +11,23 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
   return (
     <section
       id="home"
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen lg:h-screen flex items-center justify-center overflow-hidden"
     >
-     <HeroBackgroundCarousel/>
+      <HeroBackgroundCarousel />
 
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#C9A177]/10 to-[#C9A177] z-1" />
 
-      <div className="relative z-20 text-center px-6 max-w-5xl">
-        <div className="flex items-center justify-center gap-2 mb-4">
+      <div className="relative z-20 text-center px-4 sm:px-6 max-w-5xl">
+        <div className="flex items-center justify-center gap-2 mt-10">
           <Typography variant="h1" textColor="primary" weight="extrabold">
             Aamantran
           </Typography>
-          </div>
+        </div>
+
         <div className="flex items-center justify-center gap-2 mb-4">
-          
-          <MapPin className="text-[#7570BC]" size={24} />
+          <MapPin className="text-[#7570BC]" size={20} />
           <Typography variant="paragraph" textColor="primary" weight="semibold">
-           {URL.LOCATION}
+            {URL.LOCATION}
           </Typography>
         </div>
 
@@ -36,7 +36,7 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
           textColor="primary"
           weight="extrabold"
           align="center"
-          className="mb-6"
+          className="mb-5 sm:mb-6"
         >
           A Perfect Time for
           <br />
@@ -45,9 +45,9 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
 
         <Typography
           variant="paragraph"
-          textColor="secondary"
+          textColor="white"
           align="center"
-          className="mb-8 max-w-2xl mx-auto"
+          className="mb-6 sm:mb-8 max-w-2xl mx-auto"
         >
           Looking for reasons to try yoga? From increased strength to
           flexibility to heart health, we have 38 benefits to getting on your
@@ -57,15 +57,16 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="#booking"
-            className="bg-[#7570BC] text-white px-8 py-4 rounded-full hover:bg-[#C59594] transition-all transform hover:scale-105"
+            className="bg-[#7570BC] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#C59594] transition-all transform hover:scale-105"
           >
             <Typography variant="paragraph" textColor="white" weight="semibold">
               Book Your Stay
             </Typography>
           </a>
+
           <a
             href="#rooms"
-            className="border-2 border-[#7570BC] text-[#7570BC] px-8 py-4 rounded-full hover:bg-[#7570BC]/10 transition-all"
+            className="border-2 border-[#7570BC] text-[#7570BC] px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#7570BC]/10 transition-all"
           >
             <Typography
               variant="paragraph"
@@ -77,7 +78,7 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
           </a>
         </div>
 
-        <div className="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-12 sm:mt-16 max-w-2xl mx-auto">
           <div className="text-center flex flex-col items-center">
             <Typography
               variant="h3"
@@ -91,6 +92,7 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
               Altitude
             </Typography>
           </div>
+
           <div className="text-center flex flex-col items-center">
             <Typography
               variant="h3"
@@ -104,9 +106,10 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
               Avg Temp
             </Typography>
           </div>
+
           <div className="text-center flex flex-col items-center">
             <div className="flex items-center justify-center gap-1 mb-2">
-              <Star className="fill-yellow-500 text-yellow-500" size={28} />
+              <Star className="fill-yellow-500 text-yellow-500" size={24} />
               <Typography variant="h3" textColor="primary" weight="bold">
                 4.9
               </Typography>
@@ -118,8 +121,8 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
-        <ChevronRight size={32} className="rotate-90 text-[#7570BC]" />
+      <div className="absolute bottom-1 sm:bottom-1 right-1 transform -translate-x-1/2 animate-bounce z-20">
+        <ChevronRight size={28} className="rotate-90 text-[#7570BC]" />
       </div>
     </section>
   );

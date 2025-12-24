@@ -2,6 +2,7 @@ import URL, { NavItem } from "@/app/constant";
 import { Menu, Phone, X } from "lucide-react";
 import Image from "next/image";
 import Typography from "../Typography";
+
 interface NavigationProps {
   menuOpen: boolean;
   setMenuOpen: (open: boolean) => void;
@@ -21,22 +22,21 @@ const Navigation: React.FC<NavigationProps> = ({
         backdropFilter: scrollY > 50 ? "blur(12px)" : "none",
       }}
     >
-      <div className="max-w-9xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-9xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Image
             src={URL.LOGO}
             alt="Homestay Logo"
-            width={50}
-            height={50}
-            priority 
+            width={44}
+            height={44}
+            priority
           />
-          {/*<Mountain className="text-[#7570BC]" size={32} />*/}
-          <Typography variant="brand" textColor="white" weight="bold" >
-          A Boutique Homestay
+          <Typography variant="brand" textColor="white" weight="bold">
+            A Boutique Homestay
           </Typography>
         </div>
 
-        <div className="hidden md:flex gap-8">
+        <div className="hidden md:flex gap-6 lg:gap-8">
           {NavItem.map((item) => (
             <a
               key={item}
@@ -56,7 +56,7 @@ const Navigation: React.FC<NavigationProps> = ({
 
         <a
           href="tel:+919876543210"
-          className="hidden md:flex items-center gap-2 bg-[#7570BC] text-white px-6 py-2 rounded-full hover:bg-[#C59594] transition-all"
+          className="hidden md:flex items-center gap-2 bg-[#7570BC] text-white px-5 lg:px-6 py-2 rounded-full hover:bg-[#C59594] transition-all"
         >
           <Phone size={18} />
           <Typography variant="small" textColor="white" weight="semibold">
@@ -64,19 +64,22 @@ const Navigation: React.FC<NavigationProps> = ({
           </Typography>
         </a>
 
-        <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden">
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden"
+        >
           {menuOpen ? (
-            <X size={28} className="text-[#0D0A1F]" />
+            <X size={26} className="text-[#0D0A1F]" />
           ) : (
-            <Menu size={28} className="text-[#0D0A1F]" />
+            <Menu size={26} className="text-[#0D0A1F]" />
           )}
         </button>
       </div>
 
       {menuOpen && (
         <div className="md:hidden bg-[#C9A177] border-t border-[#BFC7DE]">
-          <div className="flex flex-col gap-4 p-6">
-            {["Home", "Rooms", "Dining", "Amenities", "Booking"].map((item) => (
+          <div className="flex flex-col gap-4 p-4 sm:p-6">
+            {NavItem.map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}

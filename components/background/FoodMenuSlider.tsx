@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 export default function FoodMenuSlider() {
+  // Duplicate for infinite loop
   const [items, setItems] = useState([...menuImages, ...menuImages]);
   const sliderRef = useRef<HTMLDivElement>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -14,20 +15,24 @@ export default function FoodMenuSlider() {
       if (!sliderRef.current || isTransitioning) return;
 
       setIsTransitioning(true);
+
+      // 🔹 Move by ONE IMAGE (25%)
       sliderRef.current.style.transition = "transform 1s ease-in-out";
-      sliderRef.current.style.transform = "translateX(-12.5%)";
+      sliderRef.current.style.transform = "translateX(-25%)";
 
       setTimeout(() => {
         if (!sliderRef.current) return;
-        
+
+        // 🔹 Reset position
         sliderRef.current.style.transition = "none";
         sliderRef.current.style.transform = "translateX(0)";
 
+        // 🔹 Rotate array
         setItems((prev) => {
           const first = prev[0];
           return [...prev.slice(1), first];
         });
-        
+
         setIsTransitioning(false);
       }, 1000);
     }, 3000);
@@ -42,17 +47,17 @@ export default function FoodMenuSlider() {
         className="flex h-full w-full"
       >
         {items.map((src, index) => (
-          <div 
-            key={`${src}-${index}`} 
-            className="relative w-[12.5%] h-full flex-shrink-0"
+          <div
+            key={`${src}-${index}`}
+            className="relative w-[25%] h-full flex-shrink-0"
           >
             <Image
               src={src}
               alt={`Food background ${(index % menuImages.length) + 1}`}
               fill
               className="object-cover"
-              priority={index < 16}
-              sizes="12.5vw"
+              priority={index < 8} // 4 visible × 2 buffer
+              sizes="25vw"
             />
           </div>
         ))}

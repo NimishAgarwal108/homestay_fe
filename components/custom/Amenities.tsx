@@ -1,5 +1,6 @@
 import { Car, Coffee, Mountain, Trees, Utensils, Wifi } from 'lucide-react';
 import Typography from "../Typography";
+
 const Amenities = () => {
   const amenities = [
     { icon: Wifi, title: "High-Speed WiFi", desc: "Stay connected even in the mountains" },
@@ -11,10 +12,19 @@ const Amenities = () => {
   ];
 
   return (
-    <section id="amenities" className="py-24 px-6 bg-[#BFC7DE]">
+    <section
+      id="amenities"
+      className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#BFC7DE]"
+    >
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <Typography variant="h2" textColor="primary" weight="bold" align="center" className="mb-4">
+        <div className="text-center mb-12 sm:mb-16">
+          <Typography
+            variant="h2"
+            textColor="primary"
+            weight="bold"
+            align="center"
+            className="mb-4"
+          >
             Amenities & Facilities
           </Typography>
           <Typography variant="paragraph" textColor="secondary" align="center">
@@ -22,11 +32,22 @@ const Amenities = () => {
           </Typography>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {amenities.map((amenity, idx) => (
-            <div key={idx} className="bg-white p-6 rounded-2xl hover:shadow-xl transition-all group">
-              <amenity.icon className="text-[#7570BC] mb-4 group-hover:scale-110 transition-transform" size={40} />
-              <Typography variant="h4" textColor="primary" weight="semibold" className="mb-2">
+            <div
+              key={idx}
+              className="bg-white p-5 sm:p-6 rounded-2xl hover:shadow-xl transition-all group"
+            >
+              <amenity.icon
+                className="text-[#7570BC] mb-4 group-hover:scale-110 transition-transform"
+                size={36}
+              />
+              <Typography
+                variant="h4"
+                textColor="primary"
+                weight="semibold"
+                className="mb-2"
+              >
                 {amenity.title}
               </Typography>
               <Typography variant="paragraph" textColor="secondary">
@@ -39,4 +60,5 @@ const Amenities = () => {
     </section>
   );
 };
+
 export default Amenities;

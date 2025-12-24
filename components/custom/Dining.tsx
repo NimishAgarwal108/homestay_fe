@@ -2,19 +2,20 @@ import { menuItems } from "@/app/constant";
 import { Utensils } from "lucide-react";
 import Typography from "../Typography";
 import FoodMenuSlider from "../background/FoodMenuSlider";
+
 const Dining = () => {
   return (
     <section
       id="dining"
-      className="relative min-h-[900px] py-24 px-6 overflow-hidden"
+      className="relative min-h-[700px] sm:min-h-[800px] lg:min-h-[900px] py-16 sm:py-20 lg:py-24 px-4 sm:px-6 overflow-hidden"
     >
       {/* Background Slider */}
       <FoodMenuSlider />
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <Utensils className="mx-auto text-white mb-4" size={48} />
+        <div className="text-center mb-12 sm:mb-16">
+          <Utensils className="mx-auto text-white mb-4" size={36} />
           <Typography
             variant="h2"
             textColor="offWhite"
@@ -29,11 +30,11 @@ const Dining = () => {
           </Typography>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {menuItems.map((menu, idx) => (
             <div
               key={idx}
-              className="bg-white/90 p-6 rounded-2xl shadow-md backdrop-blur"
+              className="bg-white/90 p-5 sm:p-6 rounded-2xl shadow-md backdrop-blur"
             >
               <Typography
                 variant="h4"
@@ -56,7 +57,8 @@ const Dining = () => {
             </div>
           ))}
         </div>
-        <div className="mt-12 bg-white/80 p-8 rounded-2xl border-2 border-[#7570BC]/30 text-center">
+
+        <div className="mt-8 sm:mt-12 bg-white/80 p-5 sm:p-8 rounded-2xl border-2 border-[#7570BC]/30 text-center">
           <Typography variant="paragraph" textColor="secondary" align="center">
             <Typography
               variant="paragraph"
@@ -74,4 +76,5 @@ const Dining = () => {
     </section>
   );
 };
+
 export default Dining;

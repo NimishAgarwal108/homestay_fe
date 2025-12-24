@@ -1,5 +1,6 @@
 'use client';
 
+import About from '@/components/custom/About';
 import Amenities from '@/components/custom/Amenities';
 import BookingForm from '@/components/custom/BookingForm';
 import Contact from '@/components/custom/Contact';
@@ -103,6 +104,7 @@ export default function Page() {
     <div className="min-h-screen">
       <Navigation menuOpen={menuOpen} setMenuOpen={setMenuOpen} scrollY={scrollY} />
       <Hero canvasRef={canvasRef} />
+      <About/>
       <Rooms />
       <Dining />
       <Amenities />
