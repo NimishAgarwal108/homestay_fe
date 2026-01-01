@@ -161,6 +161,7 @@ export const formFields = [
     name: "meals",
     type: "select",
     options: [
+      { label: "Confirm Later", value: "Confirm Later" },
       { label: "Breakfast Only", value: "breakfast" },
       { label: "Breakfast + Dinner", value: "halfboard" },
       { label: "All Meals", value: "fullboard" },
