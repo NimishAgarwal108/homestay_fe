@@ -1,15 +1,16 @@
 import { MapVideo } from "@/app/constant";
 import Typography from "../Typography";
 import FloatingImageCollage from "../background/FloatingImageCollage";
+import Photos from "./Photos";
 
 export function Gallery() {
   return (
     <section
       id="gallery"
-      className="relative min-h-screen lg:h-screen bg-gradient-to-b from-[#F5EFE7] to-[#C9A177] overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-b from-[#F5EFE7] to-[#C9A177] overflow-hidden"
     >
       {/* Heading */}
-      <div className="relative z-20 pt-16 sm:pt-20 lg:pt-24 text-center px-4 sm:px-6">
+      <div className="relative z-20 pt-16 sm:pt-20 lg:pt-24 text-center px-4">
         <Typography
           variant="h2"
           textColor="primary"
@@ -24,12 +25,13 @@ export function Gallery() {
         </Typography>
       </div>
 
-      {/* GAP between heading & collage */}
-      <div className="h-6 sm:h-10 md:h-20" />
+      {/* Space */}
+      <div className="h-10 md:h-16" />
 
-      {/* Responsive container */}
+      {/* TOP ROW → Video + Collage */}
       <div className="relative z-20 flex flex-col lg:flex-row items-center justify-center gap-6 px-4 sm:px-6">
-        <div className="w-full sm:w-[70%] md:w-[50%] lg:w-[30%] h-[40vh] sm:h-[50vh] lg:h-[60vh] border-0.1 border-[#7570BC] rounded-2xl p-4 bg-white/40 backdrop-blur-md shadow-xl lg:mr-10">
+        {/* Map Video */}
+        <div className="w-full lg:w-[35%] h-[45vh] lg:h-[60vh] rounded-2xl p-4 bg-white/40 backdrop-blur-md shadow-xl">
           <video
             src={MapVideo}
             muted
@@ -40,8 +42,19 @@ export function Gallery() {
           />
         </div>
 
-        <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[50%] h-[40vh] sm:h-[50vh] lg:h-[60vh] border-0.1 border-[#7570BC] rounded-2xl p-4 bg-white/40 backdrop-blur-md shadow-xl">
+        {/* Floating Image Collage */}
+        <div className="w-full lg:w-[55%] h-[45vh] lg:h-[60vh] rounded-2xl p-4 bg-white/40 backdrop-blur-md shadow-xl">
           <FloatingImageCollage />
+        </div>
+      </div>
+
+      {/* SPACE BETWEEN */}
+      <div className="h-10 md:h-16" />
+
+      {/* BOTTOM ROW → PHOTOS (FULL WIDTH) */}
+      <div className="relative z-20 w-full px-4 sm:px-6">
+        <div className="w-full rounded-2xl p-4 bg-white/40 backdrop-blur-md shadow-xl">
+          <Photos />
         </div>
       </div>
 

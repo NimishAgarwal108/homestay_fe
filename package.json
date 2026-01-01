@@ -17,12 +17,15 @@
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-fade": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
+    "formik": "^2.4.9",
+    "input-otp": "^1.4.2",
     "lucide-react": "^0.562.0",
     "next": "16.1.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-hook-form": "^7.69.0",
     "tailwind-merge": "^3.4.0",
+    "yup": "^1.7.1",
     "zod": "^4.2.1"
   },
   "devDependencies": {
