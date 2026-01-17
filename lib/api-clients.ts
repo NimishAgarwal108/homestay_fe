@@ -37,6 +37,30 @@ interface FrontendLoginResponse {
   message?: string;
 }
 
+// Room Availability Types
+interface AvailabilityDay {
+  date: string;
+  available: boolean;
+}
+
+interface RoomAvailabilityResponse {
+  roomId: string;
+  roomName: string;
+  startDate: string;
+  endDate: string;
+  availability: AvailabilityDay[];
+}
+
+interface DateAvailabilityResponse {
+  available: boolean;
+  message: string;
+  conflictingBooking?: {
+    checkIn: Date;
+    checkOut: Date;
+    status: string;
+  } | null;
+}
+
 class ApiClient {
   private baseUrl: string;
   private timeout: number;
@@ -207,14 +231,12 @@ const apiClient = new ApiClient();
 export const api = {
   // Admin Auth endpoints
   auth: {
-    // ✅ FIXED: Transform backend response to match frontend expectations
     login: async (data: { email: string; password: string; rememberMe?: boolean }): Promise<FrontendLoginResponse> => {
       try {
         const response = await apiClient.post<BackendLoginResponse>('/admin/auth/login', data);
         
         console.log('🔄 Raw backend response:', response);
 
-        // If request failed at network level
         if (!response.success) {
           return {
             success: false,
@@ -223,14 +245,11 @@ export const api = {
           };
         }
 
-        // Backend returns data directly, not nested in 'data' property
         const backendData = response.data as BackendLoginResponse;
         
         console.log('🔄 Backend data:', backendData);
 
-        // Check if backend response has the expected structure
         if (backendData && backendData.success && backendData.token && backendData.admin) {
-          // ✅ Transform to frontend structure
           const transformedResponse: FrontendLoginResponse = {
             success: true,
             data: {
@@ -248,7 +267,6 @@ export const api = {
           return transformedResponse;
         }
 
-        // Backend returned error
         return {
           success: false,
           error: backendData?.message || 'Login failed',
@@ -277,8 +295,43 @@ export const api = {
     create: (data: any) => apiClient.post('/rooms', data),
     update: (id: string, data: any) => apiClient.put(`/rooms/${id}`, data),
     delete: (id: string) => apiClient.delete(`/rooms/${id}`),
-    checkAvailability: (id: string, data: any) =>
-      apiClient.post(`/rooms/${id}/check-availability`, data),
+    
+    // Room Availability endpoints
+    getAvailability: async (roomId: string, startDate?: string): Promise<ApiResponse<RoomAvailabilityResponse>> => {
+      const endpoint = startDate 
+        ? `/rooms/${roomId}/availability-calendar?startDate=${startDate}`
+        : `/rooms/${roomId}/availability-calendar`;
+      return apiClient.get<RoomAvailabilityResponse>(endpoint);
+    },
+    
+    checkDateAvailability: async (
+      roomId: string, 
+      checkInDate: string, 
+      checkOutDate: string
+    ): Promise<ApiResponse<DateAvailabilityResponse>> => {
+      const endpoint = `/rooms/${roomId}/check-dates?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`;
+      const response = await apiClient.get<any>(endpoint);
+      
+      console.log('🔍 checkDateAvailability raw response:', response);
+      
+      // Extract the nested data structure from backend
+      if (response.success && response.data?.data) {
+        return {
+          success: true,
+          data: response.data.data
+        };
+      }
+      
+      // If data is already at top level
+      if (response.success && response.data?.available !== undefined) {
+        return {
+          success: true,
+          data: response.data
+        };
+      }
+      
+      return response;
+    },
   },
 
   // Booking endpoints
@@ -312,3 +365,11 @@ export const api = {
 };
 
 export default apiClient;
+
+// Export types for use in components
+export type { 
+  ApiResponse, 
+  AvailabilityDay, 
+  RoomAvailabilityResponse, 
+  DateAvailabilityResponse 
+};
