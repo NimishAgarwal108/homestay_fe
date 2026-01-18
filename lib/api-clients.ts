@@ -228,6 +228,75 @@ class ApiClient {
 
 const apiClient = new ApiClient();
 
+// ========================================
+// PUBLIC API (for main website)
+// ========================================
+export const publicApi = {
+  // Room endpoints - PUBLIC (only available rooms)
+  rooms: {
+    getAll: () => apiClient.get('/rooms'), // ✅ Returns only available rooms
+    getById: (id: string) => apiClient.get(`/rooms/${id}`), // ✅ Returns only if available
+    
+    // Room Availability endpoints
+    getAvailability: async (roomId: string, startDate?: string): Promise<ApiResponse<RoomAvailabilityResponse>> => {
+      const endpoint = startDate 
+        ? `/rooms/${roomId}/availability-calendar?startDate=${startDate}`
+        : `/rooms/${roomId}/availability-calendar`;
+      return apiClient.get<RoomAvailabilityResponse>(endpoint);
+    },
+    
+    checkDateAvailability: async (
+      roomId: string, 
+      checkInDate: string, 
+      checkOutDate: string
+    ): Promise<ApiResponse<DateAvailabilityResponse>> => {
+      const endpoint = `/rooms/${roomId}/check-dates?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`;
+      const response = await apiClient.get<any>(endpoint);
+      
+      console.log('🔍 checkDateAvailability raw response:', response);
+      
+      // Extract the nested data structure from backend
+      if (response.success && response.data?.data) {
+        return {
+          success: true,
+          data: response.data.data
+        };
+      }
+      
+      // If data is already at top level
+      if (response.success && response.data?.available !== undefined) {
+        return {
+          success: true,
+          data: response.data
+        };
+      }
+      
+      return response;
+    },
+  },
+
+  // Booking endpoints
+  bookings: {
+    create: (data: any) => apiClient.post('/bookings', data),
+    getMyBookings: () => apiClient.get('/bookings/my-bookings'),
+  },
+
+  // Gallery endpoints
+  gallery: {
+    getAll: () => apiClient.get('/gallery'),
+    getById: (id: string) => apiClient.get(`/gallery/${id}`),
+    getByCategory: (category: string) => apiClient.get(`/gallery/category/${category}`),
+  },
+
+  // Contact endpoints
+  contact: {
+    create: (data: any) => apiClient.post('/contact', data),
+  },
+};
+
+// ========================================
+// ADMIN API (for admin dashboard)
+// ========================================
 export const api = {
   // Admin Auth endpoints
   auth: {
@@ -288,15 +357,16 @@ export const api = {
     logout: () => apiClient.post('/admin/auth/logout'),
   },
 
-  // Room endpoints
+  // Room endpoints - ADMIN (all rooms including unavailable)
   rooms: {
-    getAll: () => apiClient.get('/rooms'),
-    getById: (id: string) => apiClient.get(`/rooms/${id}`),
+    getAll: () => apiClient.get('/rooms/admin/all'), // ✅ Changed to /rooms/admin/all
+    getById: (id: string) => apiClient.get(`/rooms/admin/${id}`), // ✅ Changed to /rooms/admin/:id
     create: (data: any) => apiClient.post('/rooms', data),
     update: (id: string, data: any) => apiClient.put(`/rooms/${id}`, data),
     delete: (id: string) => apiClient.delete(`/rooms/${id}`),
+    toggleAvailability: (id: string) => apiClient.patch(`/rooms/${id}/toggle-availability`),
     
-    // Room Availability endpoints
+    // Room Availability endpoints (using public endpoints)
     getAvailability: async (roomId: string, startDate?: string): Promise<ApiResponse<RoomAvailabilityResponse>> => {
       const endpoint = startDate 
         ? `/rooms/${roomId}/availability-calendar?startDate=${startDate}`

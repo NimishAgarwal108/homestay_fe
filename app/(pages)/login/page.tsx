@@ -71,44 +71,44 @@ export default function Page() {
         const response = await api.auth.login({
           email: values.email,
           password: values.password,
-          rememberMe: false, // Always false - session only
+          rememberMe: false,
         });
 
         console.log('🔐 Login response:', response);
 
         if (response.success && response.data) {
-          // ✅ Type-safe access
           const loginData = response.data as LoginResponseData;
           const { token, user } = loginData;
           
           console.log('✅ Login successful, setting tokens...');
           
-          // Store in localStorage
+          // ✅ 1. Store in localStorage (for client-side use)
           setAdminToken(token);
           setAdminEmail(user.email);
 
-          // ✅ CRITICAL: Set SESSION-ONLY cookie
-          // No expires/maxAge = cookie deleted when browser closes
+          // ✅ 2. Set cookie for middleware (7 days expiration)
+          // Changed from session cookie to persistent cookie so middleware can see it
           Cookies.set('adminToken', token, {
-            path: '/',           // Available to all routes
-            sameSite: 'lax',     // CSRF protection
-            secure: false,       // Set to true in production with HTTPS
-            // NO expires or maxAge = session cookie!
+            path: '/',
+            sameSite: 'lax',
+            secure: process.env.NODE_ENV === 'production', // Only secure in production
+            expires: 7, // 7 days - you can adjust this
           });
 
-          console.log('✅ Session cookie set, redirecting to dashboard...');
+          console.log('✅ Cookie set:', Cookies.get('adminToken') ? 'YES' : 'NO');
+          console.log('✅ LocalStorage set:', localStorage.getItem('adminToken') ? 'YES' : 'NO');
 
-          // Small delay to ensure cookie is set
-          setTimeout(() => {
-            router.push('/admin/dashboard');
-          }, 100);
+          // ✅ 3. Redirect to admin dashboard
+          console.log('✅ Redirecting to /admin/dashboard...');
+          
+          // Use router.push instead of window.location for Next.js
+          router.push('/admin/dashboard');
+          
         } else {
-          // ✅ Backend error handling
           console.error('❌ Login failed:', response.error || response.message);
           setError(response.error || response.message || 'Login failed. Please try again.');
         }
       } catch (err: any) {
-        // Only true network errors reach here
         console.error('❌ Login network error:', err);
         setError('Unable to connect to server. Please try again later.');
       } finally {
