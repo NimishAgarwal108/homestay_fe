@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Utensils, Coffee, Moon } from "lucide-react";
+import { api } from "@/lib/api-clients";
+import { Coffee, Moon, Utensils } from "lucide-react";
+import { useEffect, useState } from "react";
 import Typography from "../Typography";
 import FoodMenuSlider from "../background/FoodMenuSlider";
-import { api } from "@/lib/api-clients";
+
 
 interface MenuItem {
   _id?: string;
@@ -136,9 +137,11 @@ const Dining = () => {
   if (loading) {
     return (
       <section
-        id="dining"
-        className="relative min-h-175 sm:min-h-200 lg:min-h-225 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 overflow-hidden"
-      >
+  id="dining"
+  className="relative min-h-175 sm:min-h-200 lg:min-h-225 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 overflow-hidden"
+  
+>
+
         <FoodMenuSlider />
         <div className="relative z-10 max-w-7xl mx-auto flex items-center justify-center min-h-100">
           <div className="text-center">
@@ -154,9 +157,11 @@ const Dining = () => {
 
   return (
     <section
-      id="dining"
-      className="relative min-h-175 sm:min-h-200 lg:min-h-225 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 overflow-hidden"
-    >
+  id="dining"
+  className="relative min-h-175 sm:min-h-200 lg:min-h-225 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 overflow-hidden"
+  
+>
+
       {/* Background Slider */}
       <FoodMenuSlider />
 

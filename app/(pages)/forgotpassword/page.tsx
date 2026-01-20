@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import URL from "@/app/constant";
+import { AlertCircle, ArrowLeft, CheckCircle, Mail, Send } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Mail, ArrowLeft, Send, AlertCircle, CheckCircle } from "lucide-react";
-
+import { useState } from "react";
 export default function ForgotPasswordPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -96,8 +97,14 @@ export default function ForgotPasswordPage() {
 
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4">
-            <Mail className="w-8 h-8 text-white" />
+          <div className="flex justify-center mb-2">
+            <Image
+              src={URL.LOGO}
+              alt="Homestay Logo"
+              width={200}
+              height={200}
+              priority
+            />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Forgot Password?

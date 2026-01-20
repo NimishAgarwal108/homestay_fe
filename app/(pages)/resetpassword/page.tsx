@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import URL from "@/app/constant";
+import { AlertCircle, Check, CheckCircle, Eye, EyeOff, Lock, X } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Lock, Eye, EyeOff, CheckCircle, AlertCircle, Check, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function ResetPasswordPage() {
   const router = useRouter();
@@ -155,8 +157,14 @@ export default function ResetPasswordPage() {
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4">
-            <Lock className="w-8 h-8 text-white" />
+          <div className="flex justify-center mb-2">
+            <Image
+              src={URL.LOGO}
+              alt="Homestay Logo"
+              width={200}
+              height={200}
+              priority
+            />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Reset Password

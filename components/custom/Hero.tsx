@@ -1,7 +1,8 @@
 import URL from "@/app/constant";
-import { ChevronRight, MapPin, Star } from "lucide-react";
+import { ChevronRight, MapPin } from "lucide-react";
 import Typography from "../Typography";
 import HeroBackgroundCarousel from "../background/HeroBackground";
+import LiveTemperature from "./LiveTemerature";
 
 interface HeroProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
@@ -78,7 +79,7 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
           </a>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-12 sm:mt-16 max-w-2xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-2 gap-8 mt-12 sm:mt-16 max-w-2xl mx-auto">
           <div className="text-center flex flex-col items-center">
             <Typography
               variant="h3"
@@ -94,30 +95,12 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
           </div>
 
           <div className="text-center flex flex-col items-center">
-            <Typography
-              variant="h3"
-              textColor="primary"
-              weight="bold"
-              className="mb-2"
-            >
-              {URL.AVG_TEMP}
-            </Typography>
+            <LiveTemperature latitude={30.305474} longitude={79.007174}/>
             <Typography variant="muted" textColor="secondary">
               Avg Temp
             </Typography>
           </div>
 
-          <div className="text-center flex flex-col items-center">
-            <div className="flex items-center justify-center gap-1 mb-2">
-              <Star className="fill-yellow-500 text-yellow-500" size={24} />
-              <Typography variant="h3" textColor="primary" weight="bold">
-                4.9
-              </Typography>
-            </div>
-            <Typography variant="muted" textColor="secondary">
-              Rating
-            </Typography>
-          </div>
         </div>
       </div>
 
