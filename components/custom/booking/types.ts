@@ -21,7 +21,7 @@ export interface BookingFormValues {
   checkIn: string;
   checkOut: string;
   guests: number;
-  meals: string;
+  children: number; // ✅ Added: Number of children
   name: string;
   phone: string;
   roomId: string;
@@ -34,6 +34,8 @@ export interface BookingData {
   checkIn: string;
   checkOut: string;
   guests: number;
+  children: number; // ✅ Added: Number of children
+  adults: number; // ✅ Added: Number of adults (calculated)
   guestName: string;
   guestEmail: string;
   guestPhone: string;

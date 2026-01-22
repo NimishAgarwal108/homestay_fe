@@ -12,28 +12,25 @@ interface RoomSelectorProps {
 const RoomSelector = ({ rooms, onRoomChange }: RoomSelectorProps) => {
   return (
     <div>
-      <Typography variant="label" textColor="primary" className="mb-2 block">
-        Select Room *
-      </Typography>
       <Field
         as="select"
         name="roomId"
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           onRoomChange(e.target.value);
         }}
-        className="w-full px-4 py-3 rounded-xl bg-[#F5EFE7] border border-[#C9A177]/40 focus:border-[#7570BC] focus:ring-2 focus:ring-[#7570BC]/20 outline-none transition"
+        className="w-full px-4 py-3.5 rounded-xl bg-white/95 backdrop-blur-sm border-2 border-white/30 text-gray-900 font-medium shadow-sm hover:bg-white focus:bg-white focus:border-white focus:ring-4 focus:ring-white/40 outline-none transition-all"
       >
         <option value="">Choose a room...</option>
         {rooms.map((room) => (
           <option key={room._id} value={room._id}>
-            {room.name} - ₹{room.price}/night
+            {room.name} - ₹{room.price.toLocaleString()}/night
           </option>
         ))}
       </Field>
       <ErrorMessage name="roomId">
         {(msg) => (
-          <Typography variant="small" textColor="primary" className="mt-1 text-red-600">
-            {msg}
+          <Typography variant="small" textColor="primary" className="mt-2 text-red-100 bg-red-500/20 px-3 py-1.5 rounded-lg inline-block">
+            ⚠️ {msg}
           </Typography>
         )}
       </ErrorMessage>

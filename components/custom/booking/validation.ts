@@ -5,8 +5,8 @@ import { BookingFormValues } from "./types";
 export const initialValues: BookingFormValues = {
   checkIn: "",
   checkOut: "",
-  guests: 2,
-  meals: "Confirm Later",
+  guests: 1,
+  children: 0, // ✅ Added: Default to 0 children
   name: "",
   phone: "",
   roomId: "",
@@ -27,13 +27,18 @@ export const bookingSchema = Yup.object({
   guests: Yup.number()
     .required("Number of guests is required")
     .min(1, "At least 1 guest required")
-    .max(6, "Maximum 6 guests allowed"),
+    .max(20, "Maximum 20 guests allowed") // ✅ Updated max limit
+    .integer("Number of guests must be a whole number"),
+  children: Yup.number() // ✅ Added: Children validation
+    .required("Number of children is required")
+    .min(0, "Number of children cannot be negative")
+    .max(Yup.ref("guests"), "Number of children cannot exceed total guests")
+    .integer("Number of children must be a whole number"),
   name: Yup.string()
     .required("Name is required")
     .min(2, "Name must be at least 2 characters"),
   phone: Yup.string()
     .required("Phone number is required")
     .matches(/^[+]?[0-9\s-]{10,15}$/, "Please enter a valid phone number"),
-  meals: Yup.string().required("Meal plan is required"),
   roomId: Yup.string().required("Please select a room"),
 });

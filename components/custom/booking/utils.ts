@@ -56,7 +56,7 @@ export const fetchRooms = async (): Promise<Room[]> => {
   }
 };
 
-/* 🔹 Prepare booking data for API submission */
+/* 🔹 Prepare booking data for API submission - ✅ UPDATED to include children/adults */
 export const prepareBookingData = (
   values: BookingFormValues,
   selectedRoom: Room
@@ -67,12 +67,18 @@ export const prepareBookingData = (
   const taxAmount = Math.round(basePrice * 0.12);
   const totalPrice = basePrice + taxAmount;
 
+  // ✅ Calculate adults (total guests - children)
+  const adults = values.guests - values.children;
+
   console.log('💰 Pricing Calculation:', {
     pricePerNight,
     nights,
     basePrice,
     taxAmount,
-    totalPrice
+    totalPrice,
+    guests: values.guests,
+    adults,
+    children: values.children
   });
 
   const cleanPhone = values.phone.replace(/\D/g, '');
@@ -82,6 +88,8 @@ export const prepareBookingData = (
     checkIn: values.checkIn,
     checkOut: values.checkOut,
     guests: Number(values.guests),
+    children: Number(values.children), // ✅ Added
+    adults: Number(adults), // ✅ Added
     guestName: values.name.trim(),
     guestEmail: `${cleanPhone}@guest.com`,
     guestPhone: cleanPhone,
@@ -92,9 +100,10 @@ export const prepareBookingData = (
     discountAmount: 0,
     paymentStatus: "pending",
     status: "pending",
+    // ✅ REMOVED meal preference from special requests
     specialRequests: values.specialRequests 
-      ? `${values.specialRequests.substring(0, 450)} | Meal: ${values.meals}` 
-      : `Meal preference: ${values.meals}`
+      ? values.specialRequests.substring(0, 500).trim()
+      : ""
   };
 };
 
