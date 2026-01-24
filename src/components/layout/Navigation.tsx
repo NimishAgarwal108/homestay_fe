@@ -45,7 +45,7 @@ const Navigation: React.FC<NavigationProps> = ({
             >
               <Typography
                 variant="paragraph"
-                className="text-black hover:text-white"
+                className="text-white hover:text-black"
                 weight="medium"
               >
                 {item}
@@ -79,7 +79,7 @@ const Navigation: React.FC<NavigationProps> = ({
                   variant="paragraph"
                   
                   weight="medium"
-                  className="hover:text-white transition-colors text-black"
+                  className="hover:text-black transition-colors text-white"
                 >
                   {item}
                 </Typography>

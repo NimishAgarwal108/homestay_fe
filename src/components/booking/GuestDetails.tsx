@@ -83,10 +83,7 @@ const GuestDetails = () => {
         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-3">
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white text-lg">👥</span>
-              </div>
-              <div>
+              <div className="grid grid:cols-3 gap-3">
                 <Typography variant="small" textColor="primary" weight="semibold" className="text-gray-900">
                   Guest Summary
                 </Typography>

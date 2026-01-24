@@ -26,7 +26,7 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
         </div>
 
         <div className="flex items-center justify-center gap-2 mb-4">
-          <MapPin className="text-[#7570BC]" size={20} />
+          <MapPin className="text-[red]" size={20} />
           <Typography variant="paragraph" textColor="primary" weight="semibold">
             {URL.LOCATION}
           </Typography>

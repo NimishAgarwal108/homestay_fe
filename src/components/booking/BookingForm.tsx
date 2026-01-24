@@ -73,9 +73,7 @@ const BookingForm = () => {
                   {/* Compact Room Selection Section */}
                   <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6">
                     <div className="flex items-center gap-2 mb-3">
-                      <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
-                        <span className="text-xl">🏡</span>
-                      </div>
+                      
                       <Typography varient='h3' className="text-white font-semibold text-lg">Select Your Room</Typography>
                     </div>
                     <RoomSelector 
@@ -109,9 +107,6 @@ const BookingForm = () => {
                     {/* Guest Details - Modern Grid */}
                     <div>
                       <div className="flex items-center gap-2 mb-4">
-                        <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                          <span className="text-lg">👥</span>
-                        </div>
                         <Typography varient='h3' className="font-semibold text-gray-900">Guest Information</Typography>
                       </div>
                       <GuestDetails />
@@ -120,9 +115,6 @@ const BookingForm = () => {
                     {/* Special Requests - Compact */}
                     <div>
                       <div className="flex items-center gap-2 mb-3">
-                        <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                          <span className="text-lg">💬</span>
-                        </div>
                         <Typography varient='label' className="font-medium text-gray-700">
                           Special Requests <span className="text-gray-400 text-sm">(Optional)</span>
                         </Typography >
@@ -169,7 +161,6 @@ const BookingForm = () => {
                         </>
                       ) : (
                         <>
-                          <span className="text-lg">🎉</span>
                           <span>Complete Booking</span>
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
