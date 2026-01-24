@@ -6,7 +6,8 @@ export const initialValues: BookingFormValues = {
   checkIn: "",
   checkOut: "",
   guests: 1,
-  children: 0, // ✅ Added: Default to 0 children
+  children: 0,
+  numberOfRooms: 1, // ✅ NEW: Default to 1 room
   name: "",
   phone: "",
   roomId: "",
@@ -27,13 +28,18 @@ export const bookingSchema = Yup.object({
   guests: Yup.number()
     .required("Number of guests is required")
     .min(1, "At least 1 guest required")
-    .max(20, "Maximum 20 guests allowed") // ✅ Updated max limit
+    .max(20, "Maximum 20 guests allowed")
     .integer("Number of guests must be a whole number"),
-  children: Yup.number() // ✅ Added: Children validation
+  children: Yup.number()
     .required("Number of children is required")
     .min(0, "Number of children cannot be negative")
     .max(Yup.ref("guests"), "Number of children cannot exceed total guests")
     .integer("Number of children must be a whole number"),
+  numberOfRooms: Yup.number() // ✅ NEW: Room validation
+    .required("Number of rooms is required")
+    .min(1, "At least 1 room required")
+    .max(6, "Maximum 6 rooms allowed")
+    .integer("Number of rooms must be a whole number"),
   name: Yup.string()
     .required("Name is required")
     .min(2, "Name must be at least 2 characters"),

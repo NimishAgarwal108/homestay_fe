@@ -56,14 +56,16 @@ export const fetchRooms = async (): Promise<Room[]> => {
   }
 };
 
-/* 🔹 Prepare booking data for API submission - ✅ UPDATED to include children/adults */
+/* 🔹 Prepare booking data for API submission - ✅ FIXED to include numberOfRooms */
 export const prepareBookingData = (
   values: BookingFormValues,
   selectedRoom: Room
 ): BookingData => {
   const nights = calculateNights(values.checkIn, values.checkOut);
   const pricePerNight = Number(selectedRoom.price) || 3500;
-  const basePrice = pricePerNight * nights;
+  
+  // ✅ Calculate base price with number of rooms
+  const basePrice = pricePerNight * nights * values.numberOfRooms;
   const taxAmount = Math.round(basePrice * 0.12);
   const totalPrice = basePrice + taxAmount;
 
@@ -73,6 +75,7 @@ export const prepareBookingData = (
   console.log('💰 Pricing Calculation:', {
     pricePerNight,
     nights,
+    numberOfRooms: values.numberOfRooms, // ✅ Added
     basePrice,
     taxAmount,
     totalPrice,
@@ -83,13 +86,14 @@ export const prepareBookingData = (
 
   const cleanPhone = values.phone.replace(/\D/g, '');
 
-  return {
+  const bookingData: BookingData = {
     room: selectedRoom._id,
     checkIn: values.checkIn,
     checkOut: values.checkOut,
     guests: Number(values.guests),
-    children: Number(values.children), // ✅ Added
-    adults: Number(adults), // ✅ Added
+    children: Number(values.children),
+    numberOfRooms: Number(values.numberOfRooms), // ✅ CRITICAL FIX - This was missing!
+    adults: Number(adults),
     guestName: values.name.trim(),
     guestEmail: `${cleanPhone}@guest.com`,
     guestPhone: cleanPhone,
@@ -100,11 +104,14 @@ export const prepareBookingData = (
     discountAmount: 0,
     paymentStatus: "pending",
     status: "pending",
-    // ✅ REMOVED meal preference from special requests
     specialRequests: values.specialRequests 
       ? values.specialRequests.substring(0, 500).trim()
       : ""
   };
+
+  console.log('📤 Final booking data being sent:', bookingData);
+  
+  return bookingData;
 };
 
 /* 🔹 Format date for display */
