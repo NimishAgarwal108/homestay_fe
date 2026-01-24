@@ -1,6 +1,7 @@
 import { GalleryImage } from '@/types/admin';
 import { Image as ImageIcon, Loader, Plus, RefreshCw, Trash2 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
+import Typography from '../layout/Typography';
 
 interface PhotosTabProps {
   onSuccess: (message: string) => void;
@@ -157,10 +158,10 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold">Website Photos</h2>
-          <p className="text-sm text-gray-600 mt-1">
+          <Typography varient='h2' className="text-2xl font-bold">Website Photos</Typography>
+          <Typography varient='paragraph' className="text-sm text-gray-600 mt-1">
             {filteredImages.length} images
-          </p>
+          </Typography>
         </div>
         <div className="flex gap-3">
           <button
@@ -184,15 +185,15 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
 
       {uploadProgress && (
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <p className="text-blue-800 text-sm flex items-center gap-2">
+          <Typography varient='paragraph' className="text-blue-800 text-sm flex items-center gap-2">
             <Loader size={16} className="animate-spin" />
             {uploadProgress}
-          </p>
+          </Typography>
         </div>
       )}
 
       <div className="bg-white rounded-lg shadow p-6 border">
-        <h3 className="text-lg font-semibold mb-4">Upload New Images</h3>
+        <Typography varient='h3' className="text-lg font-semibold mb-4">Upload New Images</Typography>
         <div className="grid grid-cols-2 gap-4">
           {['hero', 'gallery'].map(category => (
             <div key={category}>
@@ -221,7 +222,7 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
       {filteredImages.length === 0 ? (
         <div className="text-center py-12 bg-white rounded-lg border">
           <ImageIcon size={48} className="mx-auto text-gray-300 mb-4" />
-          <p className="text-gray-500">No images</p>
+          <Typography varient='paragraph' className="text-gray-500">No images</Typography>
         </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -260,7 +261,7 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
               </div>
               
               <div className="p-3">
-                <p className="text-sm font-medium truncate">{image.title}</p>
+                <Typography varient='paragraph' className="text-sm font-medium truncate">{image.title}</Typography>
                 <div className="flex justify-between mt-2">
                   <span className="px-2 py-1 rounded text-xs bg-blue-100 text-blue-800 capitalize">
                     {image.category}

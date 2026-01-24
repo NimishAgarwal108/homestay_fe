@@ -1,6 +1,7 @@
+import { deleteFromCloudinary, uploadToCloudinary } from '@/lib/cloudinary';
+import { Image as ImageIcon, Loader, Save, Trash2, Upload, X } from 'lucide-react';
 import React, { useState } from 'react';
-import { X, Save, Loader, Upload, Trash2, Image as ImageIcon } from 'lucide-react';
-import { uploadToCloudinary, deleteFromCloudinary } from '@/lib/cloudinary';
+import Typography from '../layout/Typography';
 
 interface Room {
   _id: string;
@@ -188,7 +189,7 @@ export default function RoomEditModal({ room, onClose, onSave }: RoomEditModalPr
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white z-10">
-          <h3 className="text-xl font-bold text-gray-900">Edit Room</h3>
+          <Typography varient='h3' className="text-xl font-bold text-gray-900">Edit Room</Typography>
           <button 
             onClick={onClose} 
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors"

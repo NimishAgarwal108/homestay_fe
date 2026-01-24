@@ -1,14 +1,14 @@
 "use client";
 
+import Typography from "@/components/layout/Typography";
+import { useBookingForm } from "@/hooks/use-booking-form";
+import { bookingSchema, initialValues } from "@/validators/booking";
 import { Field, Form, Formik } from "formik";
 import { useEffect } from "react";
-import Typography from "@/components/layout/Typography";
-import { initialValues, bookingSchema } from "@/validators/booking";
-import { useBookingForm } from "@/hooks/use-booking-form";
-import RoomSelector from "./RoomSelector";
 import DateSelector from "./DateSelector";
 import GuestDetails from "./GuestDetails";
 import NotificationPopup from "./NotificationPopup";
+import RoomSelector from "./RoomSelector";
 
 const BookingForm = () => {
   const {
@@ -40,12 +40,12 @@ const BookingForm = () => {
         <div className="max-w-5xl mx-auto">
           {/* Compact Header */}
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            <Typography varient='h2' className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
               Reserve Your Stay
-            </h2>
-            <p className="text-gray-600">
+            </Typography>
+            <Typography varient='paragraph' className="text-gray-600">
               Book your perfect mountain escape in just a few steps
-            </p>
+            </Typography>
           </div>
 
           {/* Booking Form */}
@@ -76,7 +76,7 @@ const BookingForm = () => {
                       <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
                         <span className="text-xl">🏡</span>
                       </div>
-                      <h3 className="text-white font-semibold text-lg">Select Your Room</h3>
+                      <Typography varient='h3' className="text-white font-semibold text-lg">Select Your Room</Typography>
                     </div>
                     <RoomSelector 
                       rooms={rooms}
@@ -93,7 +93,7 @@ const BookingForm = () => {
                         <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
                           <span className="text-lg">📅</span>
                         </div>
-                        <h3 className="font-semibold text-gray-900">Check-in & Check-out</h3>
+                        <Typography varient='h3' className="font-semibold text-gray-900">Check-in & Check-out</Typography>
                       </div>
                       <DateSelector
                         selectedRoomId={selectedRoomId}
@@ -112,7 +112,7 @@ const BookingForm = () => {
                         <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
                           <span className="text-lg">👥</span>
                         </div>
-                        <h3 className="font-semibold text-gray-900">Guest Information</h3>
+                        <Typography varient='h3' className="font-semibold text-gray-900">Guest Information</Typography>
                       </div>
                       <GuestDetails />
                     </div>
@@ -123,9 +123,9 @@ const BookingForm = () => {
                         <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
                           <span className="text-lg">💬</span>
                         </div>
-                        <label className="font-medium text-gray-700">
+                        <Typography varient='label' className="font-medium text-gray-700">
                           Special Requests <span className="text-gray-400 text-sm">(Optional)</span>
-                        </label>
+                        </Typography >
                       </div>
                       <Field
                         as="textarea"

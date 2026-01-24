@@ -4,7 +4,7 @@ const URL = {
   LOCATION: "Rudraprayag, Uttarakhand, India (246171)",
   PHOME_NO: "+91 9876543210",
   EMAIL: "aamantran@gmail.com",
-  ALTITUDE: "2936f",
+  ALTITUDE: "2936 feet",
   AVG_TEMP: "10°C",
   LOGO: "/images/go.png",
   LOGO_NAME: "/images/logoImage1.jpeg",

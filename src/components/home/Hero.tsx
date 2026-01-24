@@ -1,7 +1,7 @@
+import HeroBackgroundCarousel from "@/components/backgrounds/HeroBackground";
+import Typography from "@/components/layout/Typography";
 import URL from "@/constants";
 import { ChevronRight, MapPin } from "lucide-react";
-import Typography from "@/components/layout/Typography";
-import HeroBackgroundCarousel from "@/components/backgrounds/HeroBackground";
 import LiveTemperature from "./LiveTemerature";
 
 interface HeroProps {
@@ -12,7 +12,7 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
   return (
     <section
       id="home"
-      className="relative min-h-screen lg:h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen lg:h-screen flex items-center justify-center overflow-hidden pt-10 sm:pt-15"
     >
       <HeroBackgroundCarousel />
 
@@ -41,7 +41,7 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
         >
           A Perfect Time for
           <br />
-          <span className="text-[#7570BC]">Relax and Yoga Chill</span>
+          <span className="text-[#7570BC]">Relax and Chill</span>
         </Typography>
 
         <Typography
@@ -50,12 +50,10 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
           align="center"
           className="mb-6 sm:mb-8 max-w-2xl mx-auto"
         >
-          Looking for reasons to try yoga? From increased strength to
-          flexibility to heart health, we have 38 benefits to getting on your
-          mat.
+         Escape the noise and step into a space where mountains, silence, and fresh air come together. A place designed to relax, slow down, and truly unwind.
         </Typography>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-30 justify-center">
           <a
             href="#booking"
             className="bg-gradient-to-r from-[#0F766E] to-[#22C55E] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-[#C59594] transition-all transform hover:scale-105"
@@ -79,13 +77,12 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 gap-8 mt-12 sm:mt-16 max-w-2xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-2 mt-2 sm:mt-5 max-w-2xl mx-auto">
           <div className="text-center flex flex-col items-center">
             <Typography
               variant="h3"
               textColor="primary"
               weight="bold"
-              className="mb-2"
             >
               {URL.ALTITUDE}
             </Typography>
@@ -97,7 +94,7 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
           <div className="text-center flex flex-col items-center">
             <LiveTemperature latitude={30.305474} longitude={79.007174}/>
             <Typography variant="muted" textColor="secondary">
-              Avg Temp
+              Temperature
             </Typography>
           </div>
 

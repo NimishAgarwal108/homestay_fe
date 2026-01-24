@@ -1,14 +1,14 @@
-import { Car, Coffee, Mountain, Trees, Utensils, Wifi } from 'lucide-react';
 import Typography from "@/components/layout/Typography";
+import { Car, Coffee, Mountain, Trees, Utensils, Wifi } from 'lucide-react';
 
 const Amenities = () => {
   const amenities = [
     { icon: Wifi, title: "High-Speed WiFi", desc: "Stay connected even in the mountains" },
-    { icon: Utensils, title: "Home-Cooked Meals", desc: "3 meals a day included" },
-    { icon: Car, title: "Free Parking", desc: "Secure parking for your vehicle" },
+    { icon: Utensils, title: "Home-Cooked Meals", desc: "Serving local delicacies" },
+    { icon: Car, title: "Free Parking", desc: "Secured parking" },
     { icon: Mountain, title: "Mountain Treks", desc: "Guided hiking trails nearby" },
     { icon: Trees, title: "Nature Walks", desc: "Scenic forest paths" },
-    { icon: Coffee, title: "24/7 Tea/Coffee", desc: "Complimentary beverages anytime" }
+    { icon: Coffee, title: "24/7 Tea/Coffee", desc: "Beverages anytime" }
   ];
 
   return (

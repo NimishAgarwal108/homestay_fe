@@ -1,5 +1,5 @@
-import React from 'react';
-import { CheckCircle, AlertCircle, X } from 'lucide-react';
+import { AlertCircle, CheckCircle, X } from 'lucide-react';
+import Typography from '../layout/Typography';
 
 interface NotificationBannerProps {
   type: 'success' | 'error';
@@ -18,7 +18,7 @@ export default function NotificationBanner({ type, message, onClose }: Notificat
         ) : (
           <AlertCircle className="text-red-600" size={20} />
         )}
-        <p className={`${isSuccess ? 'text-green-800' : 'text-red-800'} flex-1`}>{message}</p>
+        <Typography varient='paragraph' className={`${isSuccess ? 'text-green-800' : 'text-red-800'} flex-1`}>{message}</Typography>
         <button onClick={onClose}>
           <X size={18} className={isSuccess ? 'text-green-600' : 'text-red-600'} />
         </button>

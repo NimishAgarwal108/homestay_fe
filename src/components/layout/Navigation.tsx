@@ -1,7 +1,7 @@
+import Typography from "@/components/layout/Typography";
 import URL, { NavItem } from "@/constants";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
-import Typography from "@/components/layout/Typography";
 
 interface NavigationProps {
   menuOpen: boolean;
@@ -31,21 +31,21 @@ const Navigation: React.FC<NavigationProps> = ({
             height={44}
             priority
           />
-          <Typography variant="brand" textColor="white" weight="bold">
+          <Typography variant="brand" textColor="white" weight="bold" className="hover:text-black cursor-pointer">
             A Boutique Homestay
           </Typography>
         </div>
 
-        <div className="hidden md:flex gap-6 lg:gap-8">
+        <div className="hidden md:flex gap-4 lg:gap-8">
           {NavItem.map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
-              className="text-[#0D0A1F] hover:text-[#7570BC] transition-colors font-medium"
+              className="text-white hover:text-black transition-colors font-medium"
             >
               <Typography
                 variant="paragraph"
-                textColor="primary"
+                className="text-black hover:text-white"
                 weight="medium"
               >
                 {item}
@@ -77,9 +77,9 @@ const Navigation: React.FC<NavigationProps> = ({
               >
                 <Typography
                   variant="paragraph"
-                  textColor="primary"
+                  
                   weight="medium"
-                  className="hover:text-[#7570BC] transition-colors"
+                  className="hover:text-white transition-colors text-black"
                 >
                   {item}
                 </Typography>

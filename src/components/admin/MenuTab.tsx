@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { Plus, Trash2, Save, Coffee, Utensils, Moon } from 'lucide-react';
 import { api } from '@/lib/api-client';
+import { Coffee, Moon, Plus, Save, Trash2, Utensils } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import Typography from '../layout/Typography';
 
 interface MenuItem {
   _id?: string;
@@ -148,7 +149,7 @@ export default function MenuTab({ onSuccess, onError }: MenuTabProps) {
     return (
       <div className="text-center py-12">
         <div className="animate-spin h-8 w-8 border-4 border-blue-600 border-t-transparent rounded-full mx-auto"></div>
-        <p className="mt-4 text-gray-600">Loading menu...</p>
+        <Typography varient='paragraph' className="mt-4 text-gray-600">Loading menu...</Typography>
       </div>
     );
   }
@@ -158,10 +159,10 @@ export default function MenuTab({ onSuccess, onError }: MenuTabProps) {
     return (
       <div className="text-center py-12">
         <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
-          <h3 className="text-lg font-semibold text-red-800 mb-2">No Menu Categories Found</h3>
-          <p className="text-sm text-red-600 mb-4">
+          <Typography varient='h3' className="text-lg font-semibold text-red-800 mb-2">No Menu Categories Found</Typography>
+          <Typography varient='paragraph' className="text-sm text-red-600 mb-4">
             The menu couldn't be loaded. Please check the console for errors.
-          </p>
+          </Typography>
           <button
             onClick={loadMenu}
             className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
@@ -177,10 +178,10 @@ export default function MenuTab({ onSuccess, onError }: MenuTabProps) {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Menu Management</h2>
-          <p className="text-sm text-gray-600 mt-1">
+          <Typography varient='h2' className="text-2xl font-bold text-gray-900">Menu Management</Typography>
+          <Typography varient='paragraph' className="text-sm text-gray-600 mt-1">
             Manage your Breakfast, Lunch, and Dinner offerings
-          </p>
+          </Typography>
         </div>
         <button
           onClick={handleSaveMenu}
@@ -193,10 +194,10 @@ export default function MenuTab({ onSuccess, onError }: MenuTabProps) {
 
       {/* Info Banner */}
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <p className="text-sm text-blue-800">
+        <Typography varient='paragraph' className="text-sm text-blue-800">
           💡 <strong>Tip:</strong> Add items with descriptions to make your menu more appealing. 
           Changes appear on your main website immediately after saving.
-        </p>
+        </Typography>
       </div>
 
       {/* Categories Grid - Fixed 3 categories */}
@@ -214,7 +215,7 @@ export default function MenuTab({ onSuccess, onError }: MenuTabProps) {
                 <div className="p-2 bg-blue-50 rounded-lg">
                   <IconComponent className="text-blue-600" size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">{category.category}</h3>
+                <Typography varient='h3' className="text-xl font-bold text-gray-900">{category.category}</Typography>
               </div>
 
               {/* Items List */}
@@ -222,8 +223,8 @@ export default function MenuTab({ onSuccess, onError }: MenuTabProps) {
                 {category.items.length === 0 ? (
                   <div className="text-center py-8 text-gray-400">
                     <Utensils size={32} className="mx-auto mb-2 opacity-50" />
-                    <p className="text-sm">No items yet</p>
-                    <p className="text-xs mt-1">Click "Add Item" below to get started</p>
+                    <Typography varient='paragraph' className="text-sm">No items yet</Typography>
+                    <Typography varient='paragraph' className="text-xs mt-1">Click "Add Item" below to get started</Typography>
                   </div>
                 ) : (
                   category.items.map((item, itemIndex) => (
@@ -274,7 +275,7 @@ export default function MenuTab({ onSuccess, onError }: MenuTabProps) {
 
       {/* Summary Stats */}
       <div className="bg-linear-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
-        <h3 className="font-semibold text-gray-900 mb-3">Menu Summary</h3>
+        <Typography varient='h3' className="font-semibold text-gray-900 mb-3">Menu Summary</Typography>
         <div className="grid grid-cols-3 gap-4">
           {categories.map((cat, idx) => (
             <div key={idx} className="text-center">
@@ -287,7 +288,7 @@ export default function MenuTab({ onSuccess, onError }: MenuTabProps) {
 
       {/* Help Section */}
       <div className="bg-gray-50 rounded-lg p-5 border border-gray-200">
-        <h4 className="font-semibold text-gray-900 mb-2">📋 Quick Guide</h4>
+        <Typography varient='h4' className="font-semibold text-gray-900 mb-2">📋 Quick Guide</Typography>
         <ul className="space-y-1 text-sm text-gray-700">
           <li>• <strong>Add items:</strong> Click "Add Item" button for each meal category</li>
           <li>• <strong>Descriptions:</strong> Optional but recommended for better presentation</li>

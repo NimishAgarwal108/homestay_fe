@@ -1,6 +1,6 @@
-import React from 'react';
-import { Edit, Home } from 'lucide-react';
 import { Room } from '@/types/admin';
+import { Edit, Home } from 'lucide-react';
+import Typography from '../layout/Typography';
 
 interface RoomsTabProps {
   rooms: Room[];
@@ -21,8 +21,8 @@ export default function RoomsTab({
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold">Room Management</h2>
-          <p className="text-sm text-gray-600 mt-1">Edit room details, prices, and availability</p>
+          <Typography varient='h2' className="text-2xl font-bold">Room Management</Typography>
+          <Typography varient='paragraph' className="text-sm text-gray-600 mt-1">Edit room details, prices, and availability</Typography>
         </div>
       </div>
       
@@ -40,10 +40,10 @@ export default function RoomsTab({
             <div className="p-6">
               <div className="flex justify-between mb-3">
                 <div>
-                  <h3 className="text-lg font-semibold">{room.name}</h3>
-                  <p className="text-sm text-gray-600 capitalize">
+                  <Typography varient='h3' className="text-lg font-semibold">{room.name}</Typography>
+                  <Typography varient='paragraph' className="text-sm text-gray-600 capitalize">
                     {room.type} • {room.capacity} guests
-                  </p>
+                  </Typography>
                 </div>
                 <button 
                   onClick={() => onToggleAvailability(room._id)} 
@@ -58,9 +58,9 @@ export default function RoomsTab({
                   {room.isAvailable ? 'Available' : 'Unavailable'}
                 </button>
               </div>
-              <p className="text-2xl font-bold mb-4">₹{room.price.toLocaleString()}/night</p>
+              <Typography varient='paragraph' className="text-2xl font-bold mb-4">₹{room.price.toLocaleString()}/night</Typography>
               {room.description && (
-                <p className="text-sm text-gray-600 mb-4 line-clamp-2">{room.description}</p>
+                <Typography varient='paragraph' className="text-sm text-gray-600 mb-4 line-clamp-2">{room.description}</Typography>
               )}
               <div className="flex gap-2 flex-wrap mb-4">
                 {(room.amenities || room.features || []).slice(0, 3).map((item, idx) => (
@@ -90,7 +90,7 @@ export default function RoomsTab({
       {rooms.length === 0 && (
         <div className="text-center py-12 bg-white rounded-lg border">
           <Home size={48} className="mx-auto text-gray-300 mb-4" />
-          <p className="text-gray-500">No rooms found</p>
+          <Typography varient='paragraph' className="text-gray-500">No rooms found</Typography>
         </div>
       )}
     </div>

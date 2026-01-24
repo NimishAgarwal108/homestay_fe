@@ -1,8 +1,8 @@
 "use client";
 
-import { Field, ErrorMessage, useFormikContext } from "formik";
-import { BookingFormValues } from "@/types/booking";
 import Typography from "@/components/layout/Typography";
+import { BookingFormValues } from "@/types/booking";
+import { ErrorMessage, Field, useFormikContext } from "formik";
 
 const GuestDetails = () => {
   const { values, setFieldValue } = useFormikContext<BookingFormValues>();
@@ -96,7 +96,7 @@ const GuestDetails = () => {
               </div>
             </div>
             <div className="text-right">
-              <p className="text-2xl font-bold text-blue-600">{values.guests}</p>
+              <Typography varient='paragraph' className="text-2xl font-bold text-blue-600">{values.guests}</Typography >
               <Typography variant="small" textColor="primary" className="text-xs text-gray-500">
                 Total
               </Typography>

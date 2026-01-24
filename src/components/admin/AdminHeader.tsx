@@ -1,6 +1,6 @@
-import React from 'react';
-import { RefreshCw, LogOut, ExternalLink } from 'lucide-react';
 import Cookies from 'js-cookie';
+import { ExternalLink, LogOut, RefreshCw } from 'lucide-react';
+import Typography from '../layout/Typography';
 
 interface AdminHeaderProps {
   loading: boolean;
@@ -23,8 +23,8 @@ export default function AdminHeader({ loading, onRefresh }: AdminHeaderProps) {
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold">Aamantran Homestay</h1>
-            <p className="text-sm text-gray-600">Admin Dashboard</p>
+            <Typography variant='h1' className="text-2xl font-bold">Aamantran Homestay</Typography>
+            <Typography variant='paragraph' className="text-sm text-gray-600">Admin Dashboard</Typography>
           </div>
           <div className="flex gap-4">
             <a 

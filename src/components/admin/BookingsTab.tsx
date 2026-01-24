@@ -1,6 +1,7 @@
 import { Booking } from '@/types/admin';
 import { Calendar, Eye, Search, Trash2, XCircle } from 'lucide-react';
 import { useState } from 'react';
+import Typography from '../layout/Typography';
 import BookingDetailsModal from './BookingDetailsModal';
 import StatusBadge from './StatusBadge';
 
@@ -78,27 +79,27 @@ export default function BookingsTab({
               {filteredBookings.map(booking => (
                 <tr key={booking._id} className="hover:bg-gray-50">
                   <td className="px-6 py-4">
-                    <p className="font-mono text-sm">{booking.bookingReference}</p>
+                    <Typography varient='paragraph'  className="font-mono text-sm">{booking.bookingReference}</Typography>
                   </td>
                   <td className="px-6 py-4">
                     <div>
-                      <p className="font-medium">{booking.guestName}</p>
-                      <p className="text-sm text-gray-600">{booking.guestEmail}</p>
-                      <p className="text-sm text-gray-600">{booking.guestPhone}</p>
+                      <Typography varient='paragraph'  className="font-medium">{booking.guestName}</Typography>
+                      <Typography varient='paragraph'  className="text-sm text-gray-600">{booking.guestEmail}</Typography>
+                      <Typography varient='paragraph'  className="text-sm text-gray-600">{booking.guestPhone}</Typography>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <p>{booking.room?.name || 'Room Deleted'}</p>
-                    <p className="text-sm text-gray-600">
+                    <Typography varient='paragraph' >{booking.room?.name || 'Room Deleted'}</Typography>
+                    <Typography varient='paragraph'  className="text-sm text-gray-600">
                       {booking.guests} guest{booking.guests > 1 ? 's' : ''} • {booking.nights} night{booking.nights > 1 ? 's' : ''}
-                    </p>
+                    </Typography>
                   </td>
                   <td className="px-6 py-4">
-                    <p>{new Date(booking.checkIn).toLocaleDateString()}</p>
-                    <p className="text-sm text-gray-600">to {new Date(booking.checkOut).toLocaleDateString()}</p>
+                    <Typography varient='paragraph' >{new Date(booking.checkIn).toLocaleDateString()}</Typography>
+                    <Typography varient='paragraph'  className="text-sm text-gray-600">to {new Date(booking.checkOut).toLocaleDateString()}</Typography>
                   </td>
                   <td className="px-6 py-4">
-                    <p className="font-semibold">₹{booking.totalPrice.toLocaleString()}</p>
+                    <Typography varient='paragraph'  className="font-semibold">₹{booking.totalPrice.toLocaleString()}</Typography>
                     {/* ✅ REMOVED: Payment status line that was showing "pending" */}
                   </td>
                   <td className="px-6 py-4">
@@ -155,7 +156,7 @@ export default function BookingsTab({
         {filteredBookings.length === 0 && (
           <div className="text-center py-12">
             <Calendar size={48} className="mx-auto text-gray-300 mb-4" />
-            <p className="text-gray-500">No bookings found</p>
+            <Typography varient='paragraph'  className="text-gray-500">No bookings found</Typography>
           </div>
         )}
       </div>
