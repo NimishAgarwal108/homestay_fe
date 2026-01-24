@@ -1,8 +1,12 @@
 import type { NextConfig } from "next";
 
+const isDev = process.env.NODE_ENV === 'development';
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig: NextConfig = {
   images: {
-    unoptimized: true, // This is important for local images
+    unoptimized: true, // Works fine for both dev and prod
+    
     remotePatterns: [
       {
         protocol: 'https',
@@ -14,6 +18,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
+  reactStrictMode: true,
+  
+  // Example: Different settings based on environment
+  // compress: isProd, // Only compress in production
 };
 
 export default nextConfig;
