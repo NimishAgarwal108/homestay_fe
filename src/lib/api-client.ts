@@ -41,6 +41,8 @@ interface FrontendLoginResponse {
 interface AvailabilityDay {
   date: string;
   available: boolean;
+  availableRooms?: number; // ✅ Optional for backward compatibility
+  totalRooms?: number;     // ✅ Optional for backward compatibility
 }
 
 interface RoomAvailabilityResponse {
@@ -49,14 +51,27 @@ interface RoomAvailabilityResponse {
   startDate: string;
   endDate: string;
   availability: AvailabilityDay[];
+  totalRooms?: number;
 }
 
-// ✅ FIXED: Added the three new fields
+// ✅ NEW: Unavailable Dates Response
+interface UnavailableDatesResponse {
+  success: boolean;
+  roomId: string;
+  roomName: string;
+  roomType: string;
+  totalRooms: number;
+  startDate: string;
+  endDate: string;
+  unavailableDates: string[];
+  count: number;
+}
+
 interface DateAvailabilityResponse {
   available: boolean;
-  availableRooms: number;  // ✅ NEW
-  totalRooms: number;      // ✅ NEW
-  bookedRooms: number;     // ✅ NEW
+  availableRooms: number;
+  totalRooms: number;
+  bookedRooms: number;
   message: string;
   conflictingBooking?: {
     checkIn: Date;
@@ -73,7 +88,6 @@ class ApiClient {
     this.baseUrl = config.api.url;
     this.timeout = config.api.timeout;
     
-    // Debug log
     console.log('🔧 API Client initialized with baseUrl:', this.baseUrl);
   }
 
@@ -88,7 +102,6 @@ class ApiClient {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
-    // Construct full URL
     const url = `${this.baseUrl}${endpoint}`;
     const token = this.getAuthToken();
 
@@ -278,6 +291,26 @@ export const publicApi = {
       
       return response;
     },
+
+    // ✅ NEW: Get unavailable dates for a room type
+    getUnavailableDates: async (
+      roomId: string, 
+      startDate?: string, 
+      endDate?: string
+    ): Promise<ApiResponse<UnavailableDatesResponse>> => {
+      let endpoint = `/rooms/${roomId}/unavailable-dates`;
+      const params = new URLSearchParams();
+      
+      if (startDate) params.append('startDate', startDate);
+      if (endDate) params.append('endDate', endDate);
+      
+      if (params.toString()) {
+        endpoint += `?${params.toString()}`;
+      }
+      
+      console.log('🔴 Fetching unavailable dates:', endpoint);
+      return apiClient.get<UnavailableDatesResponse>(endpoint);
+    },
   },
 
   // Booking endpoints
@@ -314,7 +347,7 @@ export const api = {
       try {
         const response = await apiClient.post<BackendLoginResponse>('/admin/auth/login', data);
         
-        console.log('🔄 Raw backend response:', response);
+        console.log('📄 Raw backend response:', response);
 
         if (!response.success) {
           return {
@@ -326,7 +359,7 @@ export const api = {
 
         const backendData = response.data as BackendLoginResponse;
         
-        console.log('🔄 Backend data:', backendData);
+        console.log('📄 Backend data:', backendData);
 
         if (backendData && backendData.success && backendData.token && backendData.admin) {
           const transformedResponse: FrontendLoginResponse = {
@@ -410,40 +443,49 @@ export const api = {
       
       return response;
     },
+
+    // ✅ NEW: Get unavailable dates for a room type (admin version)
+    getUnavailableDates: async (
+      roomId: string, 
+      startDate?: string, 
+      endDate?: string
+    ): Promise<ApiResponse<UnavailableDatesResponse>> => {
+      let endpoint = `/rooms/${roomId}/unavailable-dates`;
+      const params = new URLSearchParams();
+      
+      if (startDate) params.append('startDate', startDate);
+      if (endDate) params.append('endDate', endDate);
+      
+      if (params.toString()) {
+        endpoint += `?${params.toString()}`;
+      }
+      
+      console.log('🔴 Fetching unavailable dates (admin):', endpoint);
+      return apiClient.get<UnavailableDatesResponse>(endpoint);
+    },
   },
 
-  // Booking endpoints - ✅ FIXED: Added proper delete method
+  // Booking endpoints
   bookings: {
     getAll: () => apiClient.get('/bookings'),
     getById: (id: string) => apiClient.get(`/bookings/${id}`),
     create: (data: any) => apiClient.post('/bookings', data),
     update: (id: string, data: any) => apiClient.put(`/bookings/${id}`, data),
     cancel: (id: string, data?: any) => apiClient.patch(`/bookings/${id}/cancel`, data),
-    delete: (id: string) => apiClient.delete(`/bookings/${id}`), // ✅ ADDED: Proper delete endpoint
+    delete: (id: string) => apiClient.delete(`/bookings/${id}`),
     getMyBookings: () => apiClient.get('/bookings/my-bookings'),
   },
 
   // Menu endpoints - ADMIN
   menu: {
-    // Get menu (uses public endpoint)
     get: () => apiClient.get('/menu'),
-    
-    // Update entire menu (admin only)
     update: (categories: any[]) => apiClient.put('/admin/menu', { categories }),
-    
-    // Add new category (admin only) - For future expansion beyond 3 categories
     addCategory: (categoryData: { category: string; items: any[]; order: number }) => 
       apiClient.post('/admin/menu/category', categoryData),
-    
-    // Delete category (admin only)
     deleteCategory: (categoryId: string) => 
       apiClient.delete(`/admin/menu/category/${categoryId}`),
-    
-    // Add item to specific category (admin only)
     addMenuItem: (itemData: { categoryName: string; itemName: string; itemDescription?: string }) =>
       apiClient.post('/admin/menu/item', itemData),
-    
-    // Delete item from specific category (admin only)
     deleteMenuItem: (itemData: { categoryName: string; itemName: string }) =>
       apiClient.delete('/admin/menu/item', itemData),
   },
@@ -475,5 +517,6 @@ export type {
   ApiResponse,
   AvailabilityDay, 
   DateAvailabilityResponse, 
-  RoomAvailabilityResponse
+  RoomAvailabilityResponse,
+  UnavailableDatesResponse, // ✅ NEW
 };
