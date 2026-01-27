@@ -5,6 +5,7 @@ import { AlertCircle, ArrowLeft, CheckCircle, Mail, Send } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
 export default function ForgotPasswordPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -33,7 +34,7 @@ export default function ForgotPasswordPage() {
     try {
       console.log('🚀 Sending forgot password request:', email);
       
-      // ✅ CRITICAL FIX: Clear old reset token before requesting new OTP
+      // Clear old data
       sessionStorage.removeItem("resetToken");
       sessionStorage.removeItem("resetEmail");
       
@@ -49,7 +50,7 @@ export default function ForgotPasswordPage() {
       );
 
       const data = await response.json();
-      console.log('Forgot password API response:', data);
+      console.log('📥 Forgot password API response:', data);
 
       if (!response.ok) {
         setError(data.message || "Failed to send OTP");
@@ -59,18 +60,18 @@ export default function ForgotPasswordPage() {
 
       setSuccess(true);
       
-      // ✅ Store email for OTP verification
+      // Store email for OTP verification
       sessionStorage.setItem("resetEmail", email);
       
-      // ✅ FIXED: Changed route from /verify-otp to /verifyotp (matching your folder structure)
+      // ✅ FIXED: Route to /verify-otp (matching your app structure)
       const encodedEmail = encodeURIComponent(email);
       setTimeout(() => {
-        router.push(`/verifyotp?email=${encodedEmail}`);
+        router.push(`/verify-otp?email=${encodedEmail}`);
       }, 2000);
       
-      console.log('✅ OTP sent! Redirecting to verifyotp with email param');
+      console.log('✅ OTP sent! Redirecting to /verify-otp');
     } catch (err) {
-      console.error("Forgot password error:", err);
+      console.error("❌ Forgot password error:", err);
       setError("An error occurred. Please try again.");
       setIsLoading(false);
     }

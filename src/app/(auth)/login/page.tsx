@@ -233,7 +233,7 @@ export default function Page() {
               <button 
                 type="button"
                 className="text-sm text-[#7570BC] font-semibold cursor-pointer hover:underline"
-                onClick={() => router.push('/forgotpassword')}
+               onClick={() => router.push('/forgot-password')}
                 disabled={isLoading}
               >
                 Forgot password?
