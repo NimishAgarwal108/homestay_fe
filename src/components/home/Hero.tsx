@@ -52,7 +52,7 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
         >
          Escape the noise and step into a space where mountains, silence, and fresh air come together. A place designed to relax, slow down, and truly unwind.
         </Typography>
-
+        {/* comment for commit */}
         <div className="flex flex-col sm:flex-row gap-5 md:gap-35 justify-center">
           <a
             href="#booking"
