@@ -1,3 +1,4 @@
+// src/app/(auth)/verify-otp/verifyOtpClient.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -10,18 +11,31 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp
 export default function VerifyOTPClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const email = searchParams.get("email") || sessionStorage.getItem("resetEmail") || "";
-
+  const emailFromUrl = searchParams.get("email");
+  
+  const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    if (!email) {
+    // Get email from URL or sessionStorage
+    const storedEmail = typeof window !== 'undefined' ? sessionStorage.getItem("resetEmail") : null;
+    const finalEmail = emailFromUrl || storedEmail || "";
+    
+    console.log('🔍 verify-otp - Email from URL:', emailFromUrl);
+    console.log('🔍 verify-otp - Email from storage:', storedEmail);
+    console.log('🔍 verify-otp - Final email:', finalEmail);
+    
+    if (!finalEmail) {
+      console.log('❌ No email found, redirecting to forgot-password');
       router.push("/forgot-password");
+      return;
     }
-  }, [email, router]);
+    
+    setEmail(finalEmail);
+  }, [emailFromUrl, router]);
 
   const handleVerifyOTP = async () => {
     if (otp.length !== 6) {
@@ -33,6 +47,8 @@ export default function VerifyOTPClient() {
     setIsLoading(true);
 
     try {
+      console.log('🚀 Verifying OTP for:', email);
+      
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/admin/auth/verify-otp`,
         {
@@ -45,6 +61,7 @@ export default function VerifyOTPClient() {
       );
 
       const data = await response.json();
+      console.log('📥 OTP verification response:', data);
 
       if (!response.ok) {
         setError(data.message || "Invalid OTP");
@@ -52,9 +69,16 @@ export default function VerifyOTPClient() {
         return;
       }
 
-      // Store reset token
+      // ✅ Store reset token from backend
       if (data.resetToken) {
+        console.log('✅ Reset token received, storing in sessionStorage');
         sessionStorage.setItem("resetToken", data.resetToken);
+        sessionStorage.setItem("resetEmail", email);
+      } else {
+        console.error('❌ No reset token in response!');
+        setError("Failed to generate reset token. Please try again.");
+        setIsLoading(false);
+        return;
       }
 
       setSuccess(true);
@@ -64,7 +88,7 @@ export default function VerifyOTPClient() {
       }, 1500);
 
     } catch (err) {
-      console.error("OTP verification error:", err);
+      console.error("❌ OTP verification error:", err);
       setError("An error occurred. Please try again.");
       setIsLoading(false);
     }
@@ -75,6 +99,8 @@ export default function VerifyOTPClient() {
     setIsLoading(true);
 
     try {
+      console.log('🔄 Resending OTP to:', email);
+      
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/admin/auth/resend-otp`,
         {
@@ -94,16 +120,25 @@ export default function VerifyOTPClient() {
         return;
       }
 
-      alert("OTP resent successfully! Check your email.");
+      alert("✅ OTP resent successfully! Check your email.");
       setOtp("");
       setIsLoading(false);
 
     } catch (err) {
-      console.error("Resend OTP error:", err);
+      console.error("❌ Resend OTP error:", err);
       setError("Failed to resend OTP. Please try again.");
       setIsLoading(false);
     }
   };
+
+  // Show loading while checking for email
+  if (!email) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 flex items-center justify-center p-4">
@@ -209,6 +244,13 @@ export default function VerifyOTPClient() {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Info Box */}
+        <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+          <p className="text-sm text-blue-900">
+            <strong>Note:</strong> OTP is valid for 10 minutes. Make sure to check your spam folder if you don't see it.
+          </p>
         </div>
       </div>
     </div>
