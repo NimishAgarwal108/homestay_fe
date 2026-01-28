@@ -24,51 +24,75 @@ export async function GET(request: NextRequest) {
     }> = [];
 
     // ========================================
-    // 1. FETCH FROM CLOUDINARY
+    // 1. FETCH FROM CLOUDINARY (EXCLUDE ROOM IMAGES)
     // ========================================
     try {
       console.log('☁️ Fetching from Cloudinary...');
       
-      // Fetch from homestay folder (your upload uses homestay/{category})
-      const cloudinaryResult = await cloudinary.api.resources({
+      // Fetch ONLY hero and gallery images from Cloudinary
+      // Fetch hero images
+      const heroResult = await cloudinary.api.resources({
         type: 'upload',
-        prefix: 'homestay/',
+        prefix: 'homestay/hero',
         max_results: 500,
         context: true,
         tags: true,
       });
 
-      console.log('📦 Cloudinary found:', cloudinaryResult.resources.length, 'images');
+      console.log('📦 Cloudinary hero images:', heroResult.resources.length);
 
-      cloudinaryResult.resources.forEach((resource: any) => {
-        // Extract category from folder path: homestay/hero -> hero
-        const pathParts = resource.public_id.split('/');
-        const category = pathParts[1] || 'gallery'; // homestay/[category]/filename
-        
+      heroResult.resources.forEach((resource: any) => {
         images.push({
           id: resource.public_id,
           url: resource.secure_url,
           title: resource.original_filename || resource.public_id.split('/').pop(),
-          category: category,
+          category: 'hero',
           uploadedAt: resource.created_at,
           publicId: resource.public_id,
           source: 'cloudinary'
         });
       });
+
+      // Fetch gallery images
+      const galleryResult = await cloudinary.api.resources({
+        type: 'upload',
+        prefix: 'homestay/gallery',
+        max_results: 500,
+        context: true,
+        tags: true,
+      });
+
+      console.log('📦 Cloudinary gallery images:', galleryResult.resources.length);
+
+      galleryResult.resources.forEach((resource: any) => {
+        images.push({
+          id: resource.public_id,
+          url: resource.secure_url,
+          title: resource.original_filename || resource.public_id.split('/').pop(),
+          category: 'gallery',
+          uploadedAt: resource.created_at,
+          publicId: resource.public_id,
+          source: 'cloudinary'
+        });
+      });
+
+      // NOTE: We're NOT fetching homestay/room images here
+      console.log('ℹ️ Skipping room images (they belong to rooms, not gallery)');
+
     } catch (cloudinaryError: any) {
       console.warn('⚠️ Cloudinary fetch failed (continuing with local):', cloudinaryError.message);
       // Continue to local files even if Cloudinary fails
     }
 
     // ========================================
-    // 2. FETCH FROM LOCAL FILESYSTEM
+    // 2. FETCH FROM LOCAL FILESYSTEM (ONLY hero and gallery folders)
     // ========================================
     console.log('💾 Fetching from local filesystem...');
     
     const folders = [
       { path: 'hero', category: 'hero' },
-      { path: 'food', category: 'dining' },
       { path: 'gallery', category: 'gallery' }
+      // NOT including 'room' folder - room images stay with rooms
     ];
 
     for (const folder of folders) {
@@ -103,7 +127,7 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    console.log('📊 Total images:', images.length, '(Cloudinary + Local)');
+    console.log('📊 Total images (hero + gallery only):', images.length);
 
     // Sort by upload date (newest first)
     images.sort((a, b) => 
