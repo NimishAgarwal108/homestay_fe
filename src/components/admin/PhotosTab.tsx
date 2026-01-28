@@ -74,7 +74,7 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
         const formData = new FormData();
         formData.append('image', file);
         formData.append('category', category);
-        formData.append('useCloudinary', 'false');
+        formData.append('useCloudinary', 'true');
 
         const response = await fetch('/api/gallery/upload', {
           method: 'POST',

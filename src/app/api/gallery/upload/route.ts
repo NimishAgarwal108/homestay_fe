@@ -1,3 +1,7 @@
+// ALSO UPDATE PhotosTab.tsx line 84:
+// Change: formData.append('useCloudinary', 'false');
+// To:     formData.append('useCloudinary', 'true');
+
 import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
@@ -72,11 +76,12 @@ export async function POST(request: NextRequest) {
       const base64 = buffer.toString('base64');
       const dataUri = `data:${file.type};base64,${base64}`;
 
-      // ⚠️ ADD THIS: upload_preset parameter for unsigned uploads
+      // 🔥 FIXED: Only use upload_preset, NO folder parameter
+      // The preset already has "homestay" as asset folder
       const result = await cloudinary.uploader.upload(dataUri, {
-        folder: `homestay/${category}`,
-        resource_type: 'auto',
-        upload_preset: 'homestay_uploads', // 🔥 ADD THIS LINE
+        upload_preset: 'homestay_uploads',
+        // ❌ REMOVED: folder: `homestay/${category}`,
+        // The preset handles the folder automatically
       });
 
       publicUrl = result.secure_url;
