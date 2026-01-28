@@ -74,7 +74,9 @@ export async function POST(request: NextRequest) {
 
       const result = await cloudinary.uploader.upload(dataUri, {
         folder: `homestay/${category}`,
-        resource_type: 'auto'
+        resource_type: 'auto',
+        tags: [category],
+        context: `category=${category}`
       });
 
       publicUrl = result.secure_url;

@@ -117,7 +117,7 @@ export default function RoomEditModal({ room, onClose, onSave }: RoomEditModalPr
         setUploadProgress(`Uploading ${i + 1} of ${files.length}...`);
 
         // Upload to Cloudinary
-        const result = await uploadToCloudinary(file);
+        const result = await uploadToCloudinary(file, 'room');
         newImages.push({
           url: result.url,
           publicId: result.publicId

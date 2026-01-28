@@ -2,32 +2,50 @@ export const cloudinaryConfig = {
   cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   apiKey: process.env.CLOUDINARY_API_KEY,
   apiSecret: process.env.CLOUDINARY_API_SECRET,
-  uploadPreset: 'homestay_rooms' // Create this in Cloudinary dashboard
+  uploadPreset: 'homestay_rooms'
 };
 
-export async function uploadToCloudinary(file: File): Promise<{ url: string; publicId: string }> {
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('upload_preset', cloudinaryConfig.uploadPreset || 'ml_default');
-  formData.append('folder', 'homestay/rooms');
-
+/**
+ * Upload image via your server-side API (RECOMMENDED)
+ * This avoids CORS issues and keeps your API secret secure
+ */
+export async function uploadToCloudinary(
+  file: File, 
+  category: string = 'gallery'
+): Promise<{ url: string; publicId: string }> {
   try {
-    const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudinaryConfig.cloudName}/image/upload`,
-      {
-        method: 'POST',
-        body: formData
-      }
-    );
+    const token = localStorage.getItem('adminToken');
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('category', category);
+    formData.append('useCloudinary', 'true');
+
+    const response = await fetch('/api/gallery/upload', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      body: formData
+    });
 
     if (!response.ok) {
-      throw new Error('Upload failed');
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Upload failed');
     }
 
     const data = await response.json();
+
+    if (!data.success) {
+      throw new Error(data.error || 'Upload failed');
+    }
+
     return {
-      url: data.secure_url,
-      publicId: data.public_id
+      url: data.url,
+      publicId: data.publicId
     };
   } catch (error: any) {
     console.error('Cloudinary upload error:', error);
@@ -36,18 +54,43 @@ export async function uploadToCloudinary(file: File): Promise<{ url: string; pub
 }
 
 /**
- * Delete image from Cloudinary
+ * Upload multiple images
+ */
+export async function uploadMultipleToCloudinary(
+  files: File[],
+  category: string = 'gallery',
+  onProgress?: (current: number, total: number) => void
+): Promise<Array<{ url: string; publicId: string }>> {
+  const results = [];
+
+  for (let i = 0; i < files.length; i++) {
+    if (onProgress) {
+      onProgress(i + 1, files.length);
+    }
+    const result = await uploadToCloudinary(files[i], category);
+    results.push(result);
+  }
+
+  return results;
+}
+
+/**
+ * Delete image from Cloudinary (via your API)
  */
 export async function deleteFromCloudinary(publicId: string): Promise<boolean> {
   try {
-    // This needs to be done server-side for security
-    const response = await fetch('/api/cloudinary/delete', {
-      method: 'POST',
+    const token = localStorage.getItem('adminToken');
+    
+    const response = await fetch('/api/gallery/delete', {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+        'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({ publicId })
+      body: JSON.stringify({ 
+        imageUrl: `cloudinary://${publicId}`, // Dummy URL, publicId is what matters
+        publicId 
+      })
     });
 
     const data = await response.json();
