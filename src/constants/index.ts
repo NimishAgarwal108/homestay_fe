@@ -2,8 +2,8 @@ import { Car, Coffee, Mountain, Trees, Utensils, Wifi } from "lucide-react";
 const URL = {
   HOMESTAY_LOGO: "/images/HomeStayHeading.jpg",
   LOCATION: "Rudraprayag, Uttarakhand, India (246171)",
-  PHOME_NO: "+91 9876543210",
-  EMAIL: "aamantran@gmail.com",
+  PHOME_NO: "+91 9857224648",
+  EMAIL: "aamantranstays@gmail.com",
   ALTITUDE: "2936 feet",
   AVG_TEMP: "10°C",
   LOGO: "/images/go.png",

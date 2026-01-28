@@ -188,7 +188,7 @@ const GuestDetails = ({ rooms }: GuestDetailsProps) => {
       <div className="grid grid-cols-3 gap-1">
         <div>
           <Typography variant="label" textColor="primary" className="mb-2 block">
-            Total Guests*
+          Guests*
           </Typography>
           <input
             type="text"

@@ -426,10 +426,6 @@ export default function RoomEditModal({ room, onClose, onSave }: RoomEditModalPr
                 Add URL
               </button>
             </div>
-
-            <p className="text-xs text-gray-500 mt-2">
-              📸 Images are uploaded to Cloudinary (free tier). First image is the primary display image.
-            </p>
           </div>
 
           <div className="flex gap-3 pt-4 border-t border-gray-200">

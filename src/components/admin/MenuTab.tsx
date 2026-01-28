@@ -120,7 +120,7 @@ export default function MenuTab({ onSuccess, onError }: MenuTabProps) {
 
   const handleAddItem = (categoryIndex: number) => {
     const updated = [...categories];
-    updated[categoryIndex].items.push({ name: '', description: '' });
+    updated[categoryIndex].items.unshift({ name: '', description: '' });
     setCategories(updated);
     console.log('➕ Added item to category:', updated[categoryIndex].category);
   };
