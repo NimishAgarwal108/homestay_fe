@@ -72,9 +72,11 @@ export async function POST(request: NextRequest) {
       const base64 = buffer.toString('base64');
       const dataUri = `data:${file.type};base64,${base64}`;
 
+      // ⚠️ ADD THIS: upload_preset parameter for unsigned uploads
       const result = await cloudinary.uploader.upload(dataUri, {
         folder: `homestay/${category}`,
-        resource_type: 'auto'
+        resource_type: 'auto',
+        upload_preset: 'homestay_uploads', // 🔥 ADD THIS LINE
       });
 
       publicUrl = result.secure_url;
