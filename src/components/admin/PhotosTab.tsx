@@ -69,7 +69,7 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
           continue;
         }
 
-        setUploadProgress(Uploading ${i + 1}/${files.length}: ${file.name});
+        setUploadProgress(`Uploading ${i + 1}/${files.length}: ${file.name}`);
 
         const formData = new FormData();
         formData.append('image', file);

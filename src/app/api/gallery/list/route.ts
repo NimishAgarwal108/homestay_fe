@@ -122,7 +122,7 @@ export async function GET(request: NextRequest) {
           }
         }
       } catch (error) {
-        console.warn(⚠️ Failed to read ${folder.path}:, error);
+        console.warn(`⚠️ Failed to read ${folder.path}:`, error);
         continue;
       }
     }
