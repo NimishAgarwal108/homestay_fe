@@ -99,7 +99,7 @@ export async function GET(request: NextRequest) {
       const folderPath = path.join(process.cwd(), 'public', folder.path);
       
       if (!existsSync(folderPath)) {
-        console.log(ℹ️ Folder not found: ${folder.path});
+       console.log(`ℹ️ Folder not found: ${folder.path}`);
         continue;
       }
       

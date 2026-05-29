@@ -60,7 +60,7 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
         const file = files[i];
         
         if (!file.type.startsWith('image/')) {
-          onError(${file.name} is not an image);
+         onError(`${file.name} is not an image`);
           continue;
         }
 

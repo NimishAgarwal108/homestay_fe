@@ -51,7 +51,7 @@ export async function DELETE(request: NextRequest) {
       // Delete from local filesystem
       try {
         // Extract file path from URL (e.g., /gallery/image.jpg -> public/gallery/image.jpg)
-        const urlPath = imageUrl.startsWith('/') ? imageUrl : /${imageUrl};
+        const urlPath = imageUrl.startsWith('/') ? imageUrl : `/${imageUrl}`;
         const filepath = path.join(process.cwd(), 'public', urlPath);
         
         await unlink(filepath);
