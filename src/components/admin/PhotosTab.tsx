@@ -23,14 +23,10 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
   const loadGalleryImages = async () => {
     try {
       setLoading(true);
-      
       const response = await fetch('/api/gallery/list');
       const data = await response.json();
-      
-      console.log('📥 API Response:', data);
-      
+
       if (data.success && data.images) {
-        console.log('✅ Loaded images:', data.images.length);
         setImages(data.images);
       } else {
         setImages([]);
@@ -43,7 +39,10 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
     }
   };
 
-  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>, category: string) => {
+  const handleUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+    category: string
+  ) => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
@@ -52,20 +51,17 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
 
     try {
       const token = localStorage.getItem('adminToken');
-      if (!token) {
-        throw new Error('No authentication token found');
-      }
+      if (!token) throw new Error('No authentication token found');
 
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        
+
         if (!file.type.startsWith('image/')) {
           onError(`${file.name} is not an image`);
           continue;
         }
-
         if (file.size > 10 * 1024 * 1024) {
-          onError(`${file.name} is too large`);
+          onError(`${file.name} is too large (max 10 MB)`);
           continue;
         }
 
@@ -78,27 +74,18 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
 
         const response = await fetch('/api/gallery/upload', {
           method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          },
-          body: formData
+          headers: { Authorization: `Bearer ${token}` },
+          body: formData,
         });
 
         const data = await response.json();
-        
-        console.log('Upload response:', data);
-
-        if (!data.success) {
-          throw new Error(data.error || 'Upload failed');
-        }
+        if (!data.success) throw new Error(data.error || 'Upload failed');
       }
 
       onSuccess(`✅ Uploaded ${files.length} image(s)!`);
       setUploadProgress('');
       await loadGalleryImages();
-      
     } catch (err: any) {
-      console.error('Upload error:', err);
       onError(err.message || 'Upload failed');
     } finally {
       setUploadingImage(false);
@@ -107,29 +94,42 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
   };
 
   const handleDelete = async (image: GalleryImage) => {
-    if (!confirm(`Delete ${image.title}?`)) return;
+    if (!confirm(`Delete "${image.title}"?`)) return;
 
     setDeletingId(image.id);
 
     try {
       const token = localStorage.getItem('adminToken');
-      
+
+      // Build the payload — publicId is set for Cloudinary images, undefined for local
+      const payload: { imageUrl: string; publicId?: string } = {
+        imageUrl: image.url,
+      };
+
+      // GalleryImage may carry publicId as a direct field or via extra props
+      const publicId = (image as any).publicId as string | undefined;
+      if (publicId) {
+        payload.publicId = publicId;
+      }
+
+      console.log('🗑️ Sending delete payload:', payload);
+
       const response = await fetch('/api/gallery/delete', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          imageUrl: image.url,
-          publicId: (image as any).publicId
-        })
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
+      console.log('🗑️ Delete response:', data);
 
       if (data.success) {
-        onSuccess('Deleted!');
+        onSuccess('Image deleted successfully!');
+        // Optimistically remove from local state immediately, then re-fetch
+        setImages((prev) => prev.filter((img) => img.id !== image.id));
         await loadGalleryImages();
       } else {
         throw new Error(data.error || 'Delete failed');
@@ -141,26 +141,29 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
     }
   };
 
-  const filteredImages = images.filter(img => 
-    filterCategory === 'all' || img.category === filterCategory
+  const filteredImages = images.filter(
+    (img) => filterCategory === 'all' || img.category === filterCategory
   );
 
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
         <Loader className="animate-spin h-8 w-8 text-blue-600" />
-        <span className="ml-3">Loading...</span>
+        <span className="ml-3">Loading gallery...</span>
       </div>
     );
   }
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <Typography varient='h2' className="text-2xl font-bold">Website Photos</Typography>
-          <Typography varient='paragraph' className="text-sm text-gray-600 mt-1">
-            {filteredImages.length} images
+          <Typography varient="h2" className="text-2xl font-bold">
+            Website Photos
+          </Typography>
+          <Typography varient="paragraph" className="text-sm text-gray-600 mt-1">
+            {filteredImages.length} image{filteredImages.length !== 1 ? 's' : ''}
           </Typography>
         </div>
         <div className="flex gap-3">
@@ -171,44 +174,57 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
             <RefreshCw size={16} />
             Refresh
           </button>
-          <select 
-            value={filterCategory} 
+          <select
+            value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
             className="px-4 py-2 border rounded-lg"
           >
             <option value="all">All ({images.length})</option>
-            <option value="hero">Hero ({images.filter(i => i.category === 'hero').length})</option>
-            <option value="gallery">Gallery ({images.filter(i => i.category === 'gallery').length})</option>
+            <option value="hero">
+              Hero ({images.filter((i) => i.category === 'hero').length})
+            </option>
+            <option value="gallery">
+              Gallery ({images.filter((i) => i.category === 'gallery').length})
+            </option>
           </select>
         </div>
       </div>
 
+      {/* Upload progress */}
       {uploadProgress && (
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <Typography varient='paragraph' className="text-blue-800 text-sm flex items-center gap-2">
+          <Typography
+            varient="paragraph"
+            className="text-blue-800 text-sm flex items-center gap-2"
+          >
             <Loader size={16} className="animate-spin" />
             {uploadProgress}
           </Typography>
         </div>
       )}
 
+      {/* Upload section */}
       <div className="bg-white rounded-lg shadow p-6 border">
-        <Typography varient='h3' className="text-lg font-semibold mb-4">Upload New Images</Typography>
+        <Typography varient="h3" className="text-lg font-semibold mb-4">
+          Upload New Images
+        </Typography>
         <div className="grid grid-cols-2 gap-4">
-          {['hero', 'gallery'].map(category => (
+          {(['hero', 'gallery'] as const).map((category) => (
             <div key={category}>
-              <input 
-                type="file" 
-                accept="image/*" 
+              <input
+                type="file"
+                accept="image/*"
                 multiple
                 onChange={(e) => handleUpload(e, category)}
-                className="hidden" 
-                id={`upload-${category}`} 
-                disabled={uploadingImage} 
+                className="hidden"
+                id={`upload-${category}`}
+                disabled={uploadingImage}
               />
-              <label 
+              <label
                 htmlFor={`upload-${category}`}
-                className={`flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 ${uploadingImage ? 'opacity-50' : ''}`}
+                className={`flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-colors ${
+                  uploadingImage ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
               >
                 <Plus size={40} className="text-gray-400 mb-3" />
                 <span className="font-medium capitalize">{category}</span>
@@ -219,37 +235,37 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
         </div>
       </div>
 
+      {/* Image grid */}
       {filteredImages.length === 0 ? (
         <div className="text-center py-12 bg-white rounded-lg border">
           <ImageIcon size={48} className="mx-auto text-gray-300 mb-4" />
-          <Typography varient='paragraph' className="text-gray-500">No images</Typography>
+          <Typography varient="paragraph" className="text-gray-500">
+            No images found
+          </Typography>
         </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {filteredImages.map((image) => (
             <div key={image.id} className="bg-white rounded-lg shadow border group">
               <div className="relative h-48">
-                {/* Simple img tag with full URL */}
-                <img 
+                <img
                   src={image.url}
                   alt={image.title}
                   className="w-full h-full object-cover rounded-t-lg"
                   onError={(e) => {
-                    console.error('Image failed:', image.url);
                     const target = e.target as HTMLImageElement;
-                    target.style.backgroundColor = '#fee';
-                    target.alt = 'Error loading image';
-                  }}
-                  onLoad={() => {
-                    console.log('Image loaded:', image.url);
+                    target.style.backgroundColor = '#fee2e2';
+                    target.alt = 'Failed to load';
                   }}
                 />
-                
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 flex items-center justify-center transition-all">
-                  <button 
+
+                {/* Delete overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 flex items-center justify-center transition-all rounded-t-lg">
+                  <button
                     onClick={() => handleDelete(image)}
                     disabled={deletingId === image.id}
-                    className="opacity-0 group-hover:opacity-100 p-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                    className="opacity-0 group-hover:opacity-100 p-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 transition-opacity"
+                    title="Delete image"
                   >
                     {deletingId === image.id ? (
                       <Loader size={18} className="animate-spin" />
@@ -258,10 +274,19 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
                     )}
                   </button>
                 </div>
+
+                {/* Source badge */}
+                {(image as any).source && (
+                  <span className="absolute top-2 left-2 px-1.5 py-0.5 text-xs rounded bg-black/50 text-white">
+                    {(image as any).source === 'cloudinary' ? '☁️' : '💾'}
+                  </span>
+                )}
               </div>
-              
+
               <div className="p-3">
-                <Typography varient='paragraph' className="text-sm font-medium truncate">{image.title}</Typography>
+                <Typography varient="paragraph" className="text-sm font-medium truncate">
+                  {image.title}
+                </Typography>
                 <div className="flex justify-between mt-2">
                   <span className="px-2 py-1 rounded text-xs bg-blue-100 text-blue-800 capitalize">
                     {image.category}
