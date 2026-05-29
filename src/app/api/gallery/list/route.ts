@@ -112,8 +112,8 @@ export async function GET(request: NextRequest) {
             const stats = await stat(filePath);
             
             images.push({
-              id: local-${folder.category}-${file},
-              url: /${folder.path}/${file},
+              id: `local-${folder.category}-${file}`,
+              url: `/${folder.path}/${file}`,
               title: file,
               category: folder.category,
               uploadedAt: stats.mtime.toISOString(),

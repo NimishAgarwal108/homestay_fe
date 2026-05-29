@@ -65,7 +65,7 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
         }
 
         if (file.size > 10 * 1024 * 1024) {
-          onError(${file.name} is too large);
+        onError(`${file.name} is too large`);
           continue;
         }
 
