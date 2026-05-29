@@ -60,12 +60,12 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
         const file = files[i];
         
         if (!file.type.startsWith('image/')) {
-         onError(`${file.name} is not an image`);
+          onError(`${file.name} is not an image`);
           continue;
         }
 
         if (file.size > 10 * 1024 * 1024) {
-        onError(`${file.name} is too large`);
+          onError(`${file.name} is too large`);
           continue;
         }
 
@@ -79,7 +79,7 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
         const response = await fetch('/api/gallery/upload', {
           method: 'POST',
           headers: {
-            'Authorization': Bearer ${token}
+            'Authorization': `Bearer ${token}`
           },
           body: formData
         });
@@ -93,7 +93,7 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
         }
       }
 
-      onSuccess(✅ Uploaded ${files.length} image(s)!);
+      onSuccess(`✅ Uploaded ${files.length} image(s)!`);
       setUploadProgress('');
       await loadGalleryImages();
       
@@ -107,7 +107,7 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
   };
 
   const handleDelete = async (image: GalleryImage) => {
-    if (!confirm(Delete ${image.title}?)) return;
+    if (!confirm(`Delete ${image.title}?`)) return;
 
     setDeletingId(image.id);
 
@@ -118,7 +118,7 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': Bearer ${token}
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
           imageUrl: image.url,
@@ -203,12 +203,12 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
                 multiple
                 onChange={(e) => handleUpload(e, category)}
                 className="hidden" 
-                id={upload-${category}} 
+                id={`upload-${category}`}
                 disabled={uploadingImage} 
               />
               <label 
-                htmlFor={upload-${category}}
-                className={flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 ${uploadingImage ? 'opacity-50' : ''}}
+                htmlFor={`upload-${category}`}
+                className={`flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 ${uploadingImage ? 'opacity-50' : ''}`}
               >
                 <Plus size={40} className="text-gray-400 mb-3" />
                 <span className="font-medium capitalize">{category}</span>
@@ -229,7 +229,6 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
           {filteredImages.map((image) => (
             <div key={image.id} className="bg-white rounded-lg shadow border group">
               <div className="relative h-48">
-                {/* Simple img tag with full URL */}
                 <img 
                   src={image.url}
                   alt={image.title}
