@@ -40,19 +40,61 @@ const About = () => {
 
           {/* Text Content */}
           <CardContent className="flex-1">
-            <Typography variant="h3" textColor="primary" weight="bold" className="mb-4">
-              A Boutique Experience in the Heart of Nature
-            </Typography>
-            <Typography variant="paragraph" textColor="secondary" className="mb-4">
-              Welcome to <span className="font-semibold text-[#7570BC]">Aamantran – A Boutique Homestay</span>, opening in 2026. Nestled in the breathtaking mountains of Rudraprayag, Uttarakhand, India, our homestay offers a tranquil retreat surrounded by nature's splendor.
-            </Typography>
-            <Typography variant="paragraph" textColor="secondary" className="mb-6">
-              Experience comfort, serenity, and a perfect blend of modern amenities with traditional Himalayan hospitality. Whether you seek relaxation, yoga, or a memorable family getaway, Aamantran is your perfect escape.
-            </Typography>
-            
-            <Button className="bg-[#7570BC] text-white hover:bg-[#C59594] transition-all px-6 py-3 mt-2">
-              Explore More
-            </Button>
+            <Typography
+  variant="h3"
+  textColor="primary"
+  weight="bold"
+  className="mb-4"
+>
+  A Boutique Experience in the Heart of Nature
+</Typography>
+
+<Typography
+  variant="paragraph"
+  textColor="secondary"
+  className="mb-4"
+>
+  Welcome to{" "}
+  <span className="font-semibold text-[#7570BC]">
+    Aamantran – A Boutique Homestay
+  </span>
+  , nestled amidst the breathtaking mountain landscapes of Uttarakhand.
+  Located in Khurad, Rudraprayag, Aamantran offers a peaceful retreat for
+  travelers seeking comfort, tranquility, and authentic Himalayan
+  hospitality.
+</Typography>
+
+<Typography
+  variant="paragraph"
+  textColor="secondary"
+  className="mb-6"
+>
+  Whether you are a pilgrim traveling along the Char Dham route, a trekker
+  heading toward Chopta, or simply a traveler looking to unwind in nature,
+  Aamantran provides a warm and welcoming home-away-from-home experience.
+</Typography>
+
+<Typography
+  variant="h4"
+  textColor="primary"
+  weight="bold"
+  className="mb-3"
+>
+  The Experience & Aesthetic
+</Typography>
+
+<Typography
+  variant="paragraph"
+  textColor="secondary"
+  className="mb-6"
+>
+  Aamantran Stay is thoughtfully designed to showcase the natural beauty of
+  the Himalayas. The architecture blends traditional mountain craftsmanship
+  with modern comforts, featuring elegant Deodar wood ceilings and warm,
+  inviting interiors. Every morning begins with stunning valley views and
+  fresh mountain air, best enjoyed from your private balcony or the
+  property's peaceful outdoor seating areas.
+</Typography>
           </CardContent>
         </Card>
       </div>
