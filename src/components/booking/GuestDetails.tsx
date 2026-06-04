@@ -382,7 +382,7 @@ const GuestDetails = ({ rooms }: GuestDetailsProps) => {
         </ErrorMessage>
       </div>
 
-      {/* ✅ NEW: Pricing Breakdown Display - Base + 18% GST */}
+      {/* ✅ NEW: Pricing Breakdown Display - Base + 5% GST */}
       {pricingBreakdown && values.checkIn && values.checkOut && (
         <div className="bg-gradient-to-br from-emerald-50 to-teal-50 border-2 border-emerald-200 rounded-xl p-6 space-y-4 shadow-sm">
           <Typography variant="h3" className="font-bold text-gray-900 flex items-center gap-2">
@@ -400,7 +400,7 @@ const GuestDetails = ({ rooms }: GuestDetailsProps) => {
 
             {/* GST */}
             <div className="flex justify-between items-center py-2 border-b border-emerald-200">
-              <Typography variant="paragraph" className="text-gray-700">GST (18%)</Typography>
+              <Typography variant="paragraph" className="text-gray-700">GST (5%)</Typography>
               <Typography variant="paragraph" className="font-semibold text-gray-900 text-lg">
                 {formatPrice(pricingBreakdown.gstAmount)}
               </Typography>
