@@ -118,7 +118,7 @@ export default function Photos() {
               {photos.map((photo, index) => (
                 <CarouselItem
                   key={index}
-                  className="basis-1/3 sm:basis-1/4 lg:basis-1/5"
+                  className="basis-1/1 sm:basis-1/2 lg:basis-1/3"
                 >
                   <div className="relative aspect-square overflow-hidden rounded-xl shadow-md">
                     <Image
