@@ -206,7 +206,7 @@ export const calculatePricingBreakdown = (
   numberOfRooms: number
 ) => {
   const basePrice = pricePerNight * nights * numberOfRooms;
-  const gstAmount = Math.round(basePrice * 0.18);
+  const gstAmount = Math.round(basePrice * 0.05);
   const totalPrice = basePrice + gstAmount;
 
   return {
