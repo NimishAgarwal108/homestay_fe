@@ -72,7 +72,7 @@ export interface BookingData {
   nights: number;
   pricePerNight: number;
   totalPrice: number;
-  gstAmount: number; // ✅ CHANGED from taxAmount to gstAmount (18% GST)
+  gstAmount: number; // ✅ CHANGED from taxAmount to gstAmount (5% GST)
   paymentStatus: "pending" | "paid" | "refunded";
   status: "pending" | "confirmed" | "cancelled" | "completed";
   specialRequests: string;
@@ -133,7 +133,7 @@ export interface Booking {
   adults?: number;
   totalPrice: number;
   pricePerNight: number;
-  gstAmount: number; // ✅ CHANGED from taxAmount to gstAmount (18% GST)
+  gstAmount: number; // ✅ CHANGED from taxAmount to gstAmount (5% GST)
   discountAmount: number; // Always 0 - no discounts
   status: "pending" | "confirmed" | "cancelled" | "completed";
   paymentStatus: "pending" | "paid" | "refunded";
