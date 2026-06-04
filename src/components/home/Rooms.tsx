@@ -279,7 +279,7 @@ const Rooms = () => {
                           textColor="secondary"
                           as="span"
                         >
-                          {" / night + 18% GST"}
+                          {" / night + 5% GST"}
                         </Typography>
                       </div>
                       <button
