@@ -91,7 +91,7 @@ export const prepareBookingData = (
   
   // ✅ SIMPLIFIED PRICING: Base + 5% GST ONLY
   const basePrice = pricePerNight * nights * values.numberOfRooms;
-  const gstAmount = Math.round(basePrice * 0.18); // 5% GST
+  const gstAmount = Math.round(basePrice * 0.05); // 5% GST
   const totalPrice = basePrice + gstAmount; // No discounts
 
   // Calculate adults
