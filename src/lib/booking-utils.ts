@@ -78,7 +78,7 @@ export const fetchRooms = async (): Promise<Room[]> => {
   }
 };
 
-/* 🔹 Prepare booking data for API submission - ONLY BASE + 18% GST */
+/* 🔹 Prepare booking data for API submission - ONLY BASE + 5% GST */
 export const prepareBookingData = (
   values: BookingFormValues,
   selectedRoom: Room
@@ -89,9 +89,9 @@ export const prepareBookingData = (
   // Get price per night
   const pricePerNight = Number(selectedRoom.price) || 3500;
   
-  // ✅ SIMPLIFIED PRICING: Base + 18% GST ONLY
+  // ✅ SIMPLIFIED PRICING: Base + 5% GST ONLY
   const basePrice = pricePerNight * nights * values.numberOfRooms;
-  const gstAmount = Math.round(basePrice * 0.18); // 18% GST
+  const gstAmount = Math.round(basePrice * 0.18); // 5% GST
   const totalPrice = basePrice + gstAmount; // No discounts
 
   // Calculate adults
@@ -100,14 +100,14 @@ export const prepareBookingData = (
   // Clean phone number (remove non-digits)
   const cleanPhone = values.phone.replace(/\D/g, '');
 
-  console.log('💰 Pricing Breakdown (Base + 18% GST ONLY):', {
+  console.log('💰 Pricing Breakdown (Base + 5% GST ONLY):', {
     roomName: selectedRoom.name,
     pricePerNight,
     nights,
     numberOfRooms: values.numberOfRooms,
     basePrice,
     gstAmount,
-    gstRate: '18%',
+    gstRate: '5%',
     totalPrice,
     guests: values.guests,
     adults,
@@ -212,7 +212,7 @@ export const calculatePricingBreakdown = (
   return {
     basePrice,
     gstAmount,
-    gstRate: '18%',
+    gstRate: '5%',
     totalPrice
   };
 };
