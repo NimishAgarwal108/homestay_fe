@@ -49,5 +49,17 @@ export interface GalleryImage {
   uploadedAt: string;
 }
 
+export interface Review {
+  _id: string;
+  customerName: string;
+  reviewText: string;
+  rating: number;
+  screenshotUrl: string;
+  publicId?: string;
+  isPublished: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 // UPDATED: Added 'menu' to TabType
-export type TabType = 'photos' | 'bookings' | 'rooms' | 'menu';
+export type TabType = 'photos' | 'bookings' | 'rooms' | 'menu' | 'reviews';

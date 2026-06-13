@@ -1,7 +1,8 @@
 "use client";
 
-import { Booking, Room, TabType } from '@/types/admin';
+import ReviewsTab from '@/components/admin/ReviewsTab';
 import { api } from '@/lib/api-client';
+import { Booking, Room, TabType } from '@/types/admin';
 import { Loader } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -301,15 +302,21 @@ export default function AdminDashboard() {
             onError={setError}
           />
         )}
-      </main>
-
-      {editingRoom && (
+        
+      {activeTab === 'reviews' && (
+          <ReviewsTab 
+            onSuccess={showSuccess}
+            onError={setError}
+          />
+        )}
+        {editingRoom && (
         <RoomEditModal 
           room={editingRoom} 
           onClose={() => setEditingRoom(null)} 
           onSave={handleEditRoom} 
         />
       )}
+      </main>
     </div>
   );
 }

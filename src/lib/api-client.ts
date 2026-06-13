@@ -312,7 +312,10 @@ export const publicApi = {
       return apiClient.get<UnavailableDatesResponse>(endpoint);
     },
   },
-
+   // Reviews endpoints
+  reviews: {
+    getAll: () => apiClient.get('/reviews'),
+  },
   // Booking endpoints
   bookings: {
     create: (data: any) => apiClient.post('/bookings', data),
@@ -398,6 +401,15 @@ export const api = {
       apiClient.put('/admin/auth/change-password', data),
     verify: () => apiClient.get('/admin/auth/verify'),
     logout: () => apiClient.post('/admin/auth/logout'),
+  },
+
+  // Reviews endpoints - ADMIN
+  reviews: {
+    getAll: () => apiClient.get('/admin/reviews'),
+    create: (data: { customerName: string; reviewText: string; rating: number; screenshotUrl: string; publicId?: string }) =>
+      apiClient.post('/admin/reviews', data),
+    togglePublish: (id: string) => apiClient.patch(`/admin/reviews/${id}/toggle`),
+    delete: (id: string) => apiClient.delete(`/admin/reviews/${id}`),
   },
 
   // Room endpoints - ADMIN (all rooms including unavailable)
@@ -515,8 +527,8 @@ export default apiClient;
 // Export types for use in components
 export type {
   ApiResponse,
-  AvailabilityDay, 
-  DateAvailabilityResponse, 
+  AvailabilityDay,
+  DateAvailabilityResponse,
   RoomAvailabilityResponse,
-  UnavailableDatesResponse, // ✅ NEW
+  UnavailableDatesResponse
 };

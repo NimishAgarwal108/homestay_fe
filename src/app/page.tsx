@@ -1,15 +1,16 @@
 'use client';
 
+import BookingForm from '@/components/booking/BookingForm';
 import About from '@/components/home/About';
 import Amenities from '@/components/home/Amenities';
-import BookingForm from '@/components/booking/BookingForm';
 import Contact from '@/components/home/Contact';
 import Dining from '@/components/home/Dining';
-import Footer from '@/components/layout/Footer';
 import Gallery from '@/components/home/Gallery';
 import Hero from '@/components/home/Hero';
-import Navigation from '@/components/layout/Navigation';
+import Reviews from "@/components/home/Reviews";
 import Rooms from '@/components/home/Rooms';
+import Footer from '@/components/layout/Footer';
+import Navigation from '@/components/layout/Navigation';
 import { useEffect, useRef, useState } from 'react';
 
 export default function Page() {
@@ -109,6 +110,7 @@ export default function Page() {
       <Dining />
       <Amenities />
       <Gallery/>
+      <Reviews />
       <BookingForm />
       <Contact />
       <Footer />

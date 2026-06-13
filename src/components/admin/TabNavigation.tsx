@@ -1,5 +1,5 @@
 import { TabType } from '@/types/admin';
-import { Calendar, Home, Image, Utensils } from 'lucide-react';
+import { Calendar, Home, Image, MessageSquareQuote, Utensils } from 'lucide-react';
 
 interface TabNavigationProps {
   activeTab: TabType;
@@ -12,6 +12,7 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
     { id: 'bookings' as TabType, label: 'Bookings', icon: Calendar },
     { id: 'photos' as TabType, label: 'Photos', icon: Image },
     { id: 'menu' as TabType, label: 'Menu', icon: Utensils },
+    { id: 'reviews' as TabType, label: 'Reviews', icon: MessageSquareQuote },
   ];
 
   return (
