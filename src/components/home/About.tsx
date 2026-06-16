@@ -6,7 +6,7 @@ import Image from "next/image";
 import Typography from "@/components/layout/Typography";
 const About = () => {
   return (
-    <section id="about" className="relative py-24 px-6 bg-gradient-to-b from-[#F5EFE7] via-[#C9A177]/20 to-[#BFC7DE] overflow-hidden">
+    <section id="about" className="relative py-24 px-6 bg-gradient-to-b from-[#F5EFE7] via-[#C9A177]/20 to-[#BFC7DE] overflow-hidden font-serif">
       {/* Decorative Floating Blobs */}
       <div className="absolute top-10 left-0 w-72 h-72 md:w-96 md:h-96 bg-[#C59594]/20 rounded-full blur-3xl" />
       <div className="absolute bottom-10 right-0 w-64 h-64 md:w-80 md:h-80 bg-[#7570BC]/20 rounded-full blur-3xl" />
