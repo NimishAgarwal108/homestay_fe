@@ -147,7 +147,7 @@ export default function MenuTab({ onSuccess, onError }: MenuTabProps) {
 
   if (loading && categories.length === 0) {
     return (
-      <div className="text-center py-12">
+      <div className="text-center py-12 font-serif">
         <div className="animate-spin h-8 w-8 border-4 border-blue-600 border-t-transparent rounded-full mx-auto"></div>
         <Typography varient='paragraph' className="mt-4 text-gray-600">Loading menu...</Typography>
       </div>
@@ -157,7 +157,7 @@ export default function MenuTab({ onSuccess, onError }: MenuTabProps) {
   // If no categories loaded, show error state
   if (!loading && categories.length === 0) {
     return (
-      <div className="text-center py-12">
+      <div className="text-center py-12 font-serif">
         <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
           <Typography varient='h3' className="text-lg font-semibold text-red-800 mb-2">No Menu Categories Found</Typography>
           <Typography varient='paragraph' className="text-sm text-red-600 mb-4">
@@ -175,7 +175,7 @@ export default function MenuTab({ onSuccess, onError }: MenuTabProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 font-serif">
       <div className="flex justify-between items-center">
         <div>
           <Typography varient='h2' className="text-2xl font-bold text-gray-900">Menu Management</Typography>
@@ -208,7 +208,7 @@ export default function MenuTab({ onSuccess, onError }: MenuTabProps) {
           return (
             <div
               key={category._id || catIndex}
-              className="bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200 hover:border-blue-300 transition"
+              className="bg-white rounded-xl shadow-lg p-6 border-2 border-gray-200 hover:border-blue-300 transition font-serif"
             >
               {/* Category Header */}
               <div className="flex items-center gap-3 mb-5 pb-4 border-b-2 border-gray-100">
