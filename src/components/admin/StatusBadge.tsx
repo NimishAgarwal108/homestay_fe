@@ -16,7 +16,7 @@ export default function StatusBadge({ status }: StatusBadgeProps) {
   const { bg, text, icon: Icon } = config[status] || config.pending;
   
   return (
-    <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${bg} ${text}`}>
+    <span className={`inline-flex font-serif items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${bg} ${text}`}>
       <Icon size={12} />
       {status.charAt(0).toUpperCase() + status.slice(1)}
     </span>
