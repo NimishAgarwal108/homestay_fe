@@ -138,7 +138,7 @@ const Dining = () => {
     return (
       <section
   id="dining"
-  className="relative min-h-175 sm:min-h-200 lg:min-h-225 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 overflow-hidden"
+  className="relative min-h-175 sm:min-h-200 lg:min-h-225 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 overflow-hidden font-serif"
   
 >
 
@@ -158,7 +158,7 @@ const Dining = () => {
   return (
     <section
   id="dining"
-  className="relative min-h-175 sm:min-h-200 lg:min-h-225 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 overflow-hidden"
+  className="relative min-h-175 sm:min-h-200 lg:min-h-225 py-16 sm:py-20 lg:py-24 px-4 sm:px-6 overflow-hidden font-serif"
   
 >
 
@@ -191,7 +191,7 @@ const Dining = () => {
             return (
               <div
                 key={menu._id || idx}
-                className="bg-white/95 p-6 sm:p-7 rounded-2xl shadow-xl backdrop-blur-sm hover:shadow-2xl transition-all duration-300 border border-gray-100"
+                className="bg-white/95 p-6 sm:p-7 rounded-2xl shadow-xl backdrop-blur-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 font-serif"
               >
                 {/* Category Header with Icon */}
                 <div className="flex items-center gap-3 mb-5 pb-4 border-b-2 border-gray-100">
