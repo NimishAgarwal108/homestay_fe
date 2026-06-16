@@ -34,7 +34,7 @@ export default function Reviews() {
   if (reviews.length === 0) return null;
 
   return (
-    <section id="reviews" className="py-12">
+    <section id="reviews" className="py-12 font-serif">
       <div className="w-full flex flex-col items-center">
         <Typography varient="h2" className="text-3xl font-bold mb-2 text-center">
           What Our Guests Say
