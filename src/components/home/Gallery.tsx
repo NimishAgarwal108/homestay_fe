@@ -80,7 +80,7 @@ export default function Photos() {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 font-serif">
         {[...Array(8)].map((_, i) => (
           <div
             key={i}
@@ -92,7 +92,7 @@ export default function Photos() {
   }
 
   return (
-    <section id="gallery">
+    <section id="gallery font-serif">
       <div className="w-full flex justify-center">
         <div className=" w-full sm:w-[95%] lg:w-[80%] md:h-150 aspect-video rounded-2xl p-2 sm:p-4 bg-white/40 backdrop-blur-md shadow-xl">
           <video
