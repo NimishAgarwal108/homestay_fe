@@ -14,7 +14,7 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   monthName,
 }) => {
   return (
-    <div className="flex items-center justify-between mb-4">
+    <div className="flex items-center justify-between mb-4 font-serif">
       <button
         onClick={() => setCurrentMonth(Math.max(0, currentMonth - 1))}
         disabled={currentMonth === 0}
@@ -64,7 +64,7 @@ export const CalendarDay: React.FC<CalendarDayProps> = ({
       disabled={!available || isPast}
       className={`
         aspect-square rounded-lg flex items-center justify-center text-xs font-medium
-        transition-all duration-200
+        transition-all duration-200 font-serif
         ${isPast
           ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
           : available 
@@ -92,7 +92,7 @@ export const CalendarDay: React.FC<CalendarDayProps> = ({
 
 export const CalendarLegend: React.FC = () => {
   return (
-    <div className="mt-3 flex gap-3 text-xs flex-wrap justify-center">
+    <div className="mt-3 flex gap-3 text-xs flex-wrap justify-center font-serif">
       <div className="flex items-center gap-1.5">
         <div className="w-3 h-3 bg-green-100 rounded border border-green-300"></div>
         <span>Available</span>
@@ -126,7 +126,7 @@ export const SelectionInfo: React.FC<SelectionInfoProps> = ({
 }) => {
   if (checkIn && checkOut) {
     return (
-      <div className="mt-3 p-2 bg-green-50 rounded-lg border border-green-200">
+      <div className="mt-3 p-2 bg-green-50 rounded-lg border border-green-200 font-serif">
         <p className="text-xs font-medium text-green-900">
           ✅ Selected: {new Date(checkIn).toLocaleDateString('en-US', { 
             month: 'short', 
@@ -150,7 +150,7 @@ export const SelectionInfo: React.FC<SelectionInfoProps> = ({
 
   if (checkIn && !checkOut) {
     return (
-      <div className="mt-3 p-2 bg-blue-50 rounded-lg border border-blue-200">
+      <div className="mt-3 p-2 bg-blue-50 rounded-lg border border-blue-200 font-serif">
         <p className="text-xs font-medium text-blue-900">
           📅 Check-in: {new Date(checkIn).toLocaleDateString('en-US', { 
             month: 'short', 
@@ -176,7 +176,7 @@ export const SelectionInfo: React.FC<SelectionInfoProps> = ({
 
 export const InstructionBanner: React.FC = () => {
   return (
-    <div className="mb-3 p-2 bg-blue-50 rounded-lg border border-blue-200">
+    <div className="mb-3 p-2 bg-blue-50 rounded-lg border border-blue-200 font-serif">
       <p className="text-xs text-blue-900">
         📌 <strong>How to select:</strong> Click a green date for check-in, then click another green date for check-out. 
         All dates between must be available.
