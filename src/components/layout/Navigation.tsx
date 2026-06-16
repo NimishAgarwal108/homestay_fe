@@ -16,7 +16,7 @@ const Navigation: React.FC<NavigationProps> = ({
 }) => {
   return (
     <nav
-      className="fixed top-0 w-full z-50 transition-all duration-300 font-serif"
+      className=" font-serif fixed top-0 w-full z-50 transition-all duration-300"
       style={{
         background: scrollY > 50 ? "rgba(199, 154, 119, 0.95)" : "transparent",
         backdropFilter: scrollY > 50 ? "blur(12px)" : "none",
