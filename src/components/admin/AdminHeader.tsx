@@ -19,7 +19,7 @@ export default function AdminHeader({ loading, onRefresh }: AdminHeaderProps) {
   };
 
   return (
-    <header className="bg-white border-b sticky top-0 z-40 shadow-sm">
+    <header className="bg-white border-b sticky top-0 z-40 shadow-sm font-serif">
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div>
