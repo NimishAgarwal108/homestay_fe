@@ -11,7 +11,7 @@ interface RoomSelectorProps {
 
 const RoomSelector = ({ rooms, onRoomChange }: RoomSelectorProps) => {
   return (
-    <div>
+    <div className="font-serif">
       <Field
         as="select"
         name="roomId"
