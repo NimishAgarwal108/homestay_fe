@@ -36,7 +36,7 @@ const RoomAvailabilityCalendar: React.FC<RoomAvailabilityCalendarProps> = ({
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-32">
+      <div className="flex items-center justify-center h-32 font-serif">
         <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
       </div>
     );
@@ -47,7 +47,7 @@ const RoomAvailabilityCalendar: React.FC<RoomAvailabilityCalendarProps> = ({
   const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   return (
-    <div className="w-full p-4 bg-white rounded-lg shadow-md border border-gray-200">
+    <div className="w-full p-4 bg-white rounded-lg shadow-md border border-gray-200 font-serif">
       <InstructionBanner />
 
       <CalendarHeader
