@@ -34,13 +34,10 @@ export default function Reviews() {
   if (reviews.length === 0) return null;
 
   return (
-    <section id="reviews" className="py-12 font-serif">
+    <section id="reviews" className="py-5 font-serif">
       <div className="w-full flex flex-col items-center">
-        <Typography varient="h2" className="text-3xl font-bold mb-2 text-center">
-          What Our Guests Say
-        </Typography>
         <Typography varient="paragraph" className="text-gray-600 mb-8 text-center">
-          Real reviews from real guests on WhatsApp
+          Reviews from guests on WhatsApp
         </Typography>
 
         <div className="w-full sm:w-[95%] lg:w-[80%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
