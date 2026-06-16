@@ -92,7 +92,7 @@ const LiveTemperature: React.FC<LiveTemperatureProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center font-serif">
       <Typography
         variant="h3"
         textColor="primary"
