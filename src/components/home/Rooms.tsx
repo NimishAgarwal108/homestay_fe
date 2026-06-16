@@ -53,7 +53,7 @@ function RoomImageCarousel({ images, roomName }: RoomImageCarouselProps) {
   }
 
   return (
-    <div className="relative h-52 sm:h-60 md:h-64 overflow-hidden group">
+    <div className="relative h-52 sm:h-60 md:h-64 overflow-hidden group font-serif">
       {/* Main Image */}
       <img
         src={images[currentIndex]}
@@ -168,7 +168,7 @@ const Rooms = () => {
 
   if (loading) {
     return (
-      <section id="rooms" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#BFC7DE]">
+      <section id="rooms" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#BFC7DE] font-serif">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-gray-600">Loading rooms...</p>
         </div>
@@ -178,7 +178,7 @@ const Rooms = () => {
 
   if (error) {
     return (
-      <section id="rooms" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#BFC7DE]">
+      <section id="rooms" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#BFC7DE] font-serif">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-red-600 mb-4">{error}</p>
           <button 
@@ -195,7 +195,7 @@ const Rooms = () => {
   return (
     <section
       id="rooms"
-      className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#BFC7DE]"
+      className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#BFC7DE] font-serif"
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 sm:mb-16">
@@ -230,7 +230,7 @@ const Rooms = () => {
               return (
                 <div
                   key={room._id}
-                  className="group relative bg-white rounded-2xl overflow-hidden transition-all duration-300 shadow-lg hover:sm:scale-105"
+                  className="group relative bg-white rounded-2xl overflow-hidden transition-all duration-300 shadow-lg hover:sm:scale-105 font-serif"
                 >
                   {/* Image Carousel Component */}
                   <RoomImageCarousel 
