@@ -6,7 +6,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#BFC7DE]"
+      className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#BFC7DE] font-serif"
     >
       <div className="max-w-4xl mx-auto text-center">
         <Typography
