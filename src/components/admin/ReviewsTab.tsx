@@ -167,7 +167,7 @@ export default function ReviewsTab({ onSuccess, onError }: ReviewsTabProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 font-serif">
       <div>
         <Typography varient='h2' className="text-2xl font-bold">Customer Reviews</Typography>
         <Typography varient='paragraph' className="text-sm text-gray-600 mt-1">
