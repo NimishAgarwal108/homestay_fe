@@ -183,7 +183,7 @@ const GuestDetails = ({ rooms }: GuestDetailsProps) => {
   const showRoomsError = touched.numberOfRooms && errors.numberOfRooms;
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 font-serif">
       {/* Guests, Children, and Rooms - Grid Layout */}
       <div className="grid grid-cols-3 gap-1">
         <div>
