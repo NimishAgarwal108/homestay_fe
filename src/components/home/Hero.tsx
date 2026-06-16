@@ -12,7 +12,7 @@ const Hero: React.FC<HeroProps> = ({ canvasRef }) => {
   return (
     <section
       id="home"
-      className="relative min-h-screen lg:h-screen flex items-center justify-center overflow-hidden pt-10 sm:pt-15"
+      className="relative min-h-screen lg:h-screen flex items-center justify-center overflow-hidden pt-10 sm:pt-15 font-serif"
     >
       <HeroBackgroundCarousel />
 
