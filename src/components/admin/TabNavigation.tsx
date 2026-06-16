@@ -16,7 +16,7 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
   ];
 
   return (
-    <div className=" bg-white border-b">
+    <div className=" bg-white border-b font-serif">
       <div className="max-w-7xl mx-auto px-2 sm:px-4">
         <nav className="flex gap-2 sm:gap-8 overflow-x-auto sm:overflow-visible ehitespace-nowrap scrollbar-hide">
           {tabs.map(tab => (
