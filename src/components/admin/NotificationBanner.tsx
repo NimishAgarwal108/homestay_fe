@@ -11,7 +11,7 @@ export default function NotificationBanner({ type, message, onClose }: Notificat
   const isSuccess = type === 'success';
   
   return (
-    <div className="max-w-7xl mx-auto px-4 py-4">
+    <div className="max-w-7xl mx-auto px-4 py-4 font-serif">
       <div className={`${isSuccess ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'} border rounded-lg p-4 flex gap-3`}>
         {isSuccess ? (
           <CheckCircle className="text-green-600" size={20} />
