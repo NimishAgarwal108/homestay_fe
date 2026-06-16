@@ -18,7 +18,7 @@ export default function RoomsTab({
   onDelete 
 }: RoomsTabProps) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 font-serif">
       <div className="flex justify-between items-center">
         <div>
           <Typography varient='h2' className="text-2xl font-bold">Room Management</Typography>
