@@ -5,7 +5,7 @@ import Typography from "@/components/layout/Typography";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0D0A1F] py-10 sm:py-12 px-4 sm:px-6 border-t border-[#7570BC]/30">
+    <footer className="bg-[#0D0A1F] py-10 sm:py-12 px-4 sm:px-6 border-t border-[#7570BC]/30 font-serif">
       <div className="max-w-9xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
           <div className="text-center sm:text-left">
