@@ -7,6 +7,7 @@ import Contact from '@/components/home/Contact';
 import Dining from '@/components/home/Dining';
 import Gallery from '@/components/home/Gallery';
 import Hero from '@/components/home/Hero';
+import GoogleReviews from '@/components/GoogleReviews';
 import Reviews from "@/components/home/Reviews";
 import Rooms from '@/components/home/Rooms';
 import Footer from '@/components/layout/Footer';
@@ -110,6 +111,7 @@ export default function Page() {
       <Dining />
       <Amenities />
       <Gallery/>
+      <GoogleReviews/>
       <Reviews />
       <BookingForm />
       <Contact />
