@@ -45,7 +45,7 @@ const RoomAvailabilityBox = ({
   };
 
   return (
-    <div className={`p-4 rounded-xl border-2 ${getColorClass()} shadow-md transition-all duration-300 mt-4`}>
+    <div className={`p-4 rounded-xl border-2 ${getColorClass()} shadow-md transition-all duration-300 mt-4 font-serif`}>
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-3">
           <span className="text-3xl">{getIcon()}</span>
@@ -113,7 +113,7 @@ const BookingForm = () => {
     <>
       <section
         id="booking"
-        className="py-16 px-4 sm:px-6 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50"
+        className="py-16 px-4 sm:px-6 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 font-serif"
       >
         <div className="max-w-5xl mx-auto">
           {/* Compact Header */}
