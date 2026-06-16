@@ -30,7 +30,7 @@ const DateSelector = ({
     <>
       {/* Calendar Section */}
       {showCalendar && (
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl shadow-lg border-2 border-blue-200">
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl shadow-lg border-2 border-blue-200 font-serif">
           <div className="flex items-center justify-between mb-4">
             <Typography variant="h4" textColor="primary" weight="semibold">
               📅 Select Your Dates
