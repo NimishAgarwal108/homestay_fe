@@ -155,7 +155,7 @@ export default function PhotosTab({ onSuccess, onError }: PhotosTabProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 font-serif">
       <div className="flex justify-between items-center">
         <div>
           <Typography varient='h2' className="text-2xl font-bold">Website Photos</Typography>
