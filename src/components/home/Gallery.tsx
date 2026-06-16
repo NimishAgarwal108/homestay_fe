@@ -80,7 +80,7 @@ export default function Photos() {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 font-serif">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 font-serif font-serif">
         {[...Array(8)].map((_, i) => (
           <div
             key={i}
