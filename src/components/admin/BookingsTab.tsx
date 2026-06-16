@@ -34,7 +34,7 @@ export default function BookingsTab({
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 font-serif">
       <div className="bg-white rounded-lg shadow-sm p-4 border">
         <div className="flex gap-4">
           <div className="flex-1">
