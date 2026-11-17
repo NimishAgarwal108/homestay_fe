@@ -1,3 +1,4 @@
+
 import URL from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
@@ -106,11 +107,11 @@ const Footer = () => {
                   {URL.PHOME_NO}
                 </Typography>
               </a>
-              <a href={`mailto:${URL.EMAIL}`}>
+              <a href={`mailto:${URL.EMAIL}`} className="block w-full min-w-0">
                 <Typography
                   variant="paragraph"
                   textColor="accent"
-                  className="hover:text-[#C59594]"
+                  className="hover:text-[#C59594] break-all"
                 >
                   {URL.EMAIL}
                 </Typography>
@@ -139,4 +140,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
