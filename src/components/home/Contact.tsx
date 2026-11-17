@@ -1,3 +1,4 @@
+
 import URL from '@/constants';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import Typography from "@/components/layout/Typography";
@@ -54,12 +55,12 @@ const Contact = () => {
             >
               Email
             </Typography>
-            <a href="mailto:info@masterretreat.com">
+            <a href={`mailto:${URL.EMAIL}`}>
               <Typography
                 variant="paragraph"
                 textColor="accent"
                 align="center"
-                className="hover:text-[#C59594]"
+                className="hover:text-[#C59594] break-all"
               >
                 {URL.EMAIL}
               </Typography>
@@ -95,4 +96,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
