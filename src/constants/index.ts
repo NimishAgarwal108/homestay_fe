@@ -3,7 +3,7 @@ const URL = {
   HOMESTAY_LOGO: "/images/HomeStayHeading.jpg",
   LOCATION: "Rudraprayag, Uttarakhand, India (246171)",
   PHOME_NO: "+91 9857224648",
-  EMAIL: "aamantranstays@gmail.com",
+  EMAIL: "aamantranstaysrudraprayag@gmail.com",
   ALTITUDE: "2936 feet",
   AVG_TEMP: "10°C",
   LOGO: "/images/go.png",
