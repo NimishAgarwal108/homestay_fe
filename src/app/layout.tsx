@@ -13,12 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aamantran - A Boutique Homestay in Rudraprayag",
-  description: "Experience tranquility at Aamantran Homestay in Rudraprayag, Uttarakhand. A perfect retreat in the Himalayas with breathtaking mountain views, comfortable rooms, and authentic hospitality.",
-  keywords: "Aamantran, homestay, Rudraprayag, Uttarakhand, Himalayas, mountain retreat, boutique hotel",
-  authors: [{ name: "Aamantran Homestay" }],
+  title: "Aamantran - A Boutique Stay in Rudraprayag",
+  description: "Experience tranquility at Aamantran Stay in Rudraprayag, Uttarakhand. A perfect retreat in the Himalayas with breathtaking mountain views, comfortable rooms, and authentic hospitality.",
+  keywords: "Aamantran, Stay, Rudraprayag, Uttarakhand, Himalayas, mountain retreat, boutique hotel",
+  authors: [{ name: "Aamantran Stay" }],
   openGraph: {
-    title: "Aamantran - A Boutique Homestay in Rudraprayag",
+    title: "Aamantran - A Boutique Stay in Rudraprayag",
     description: "Escape the noise and step into a space where mountains, silence, and fresh air come together.",
     type: "website",
     locale: "en_IN",

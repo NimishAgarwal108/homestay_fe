@@ -12,13 +12,13 @@ const Footer = () => {
             <div className="flex items-center justify-center sm:justify-start gap-2">
               <Image
                 src={URL.LOGO}
-                alt="Homestay Name"
+                alt="Stay Name"
                 width={60}
                 height={60}
                 priority
               />
               <Typography variant="brand" textColor="white" weight="bold">
-                A Boutique Homestay
+                A Boutique Stay
               </Typography>
             </div>
 
@@ -130,7 +130,7 @@ const Footer = () => {
 
         <div className="border-t border-[#7570BC]/30 pt-6 sm:pt-8 text-center">
           <Typography variant="paragraph" textColor="cream">
-            © 2026 Aamantaran a Boutique Homestay. All rights reserved.
+            © 2026 Aamantaran a Boutique Stay. All rights reserved.
           </Typography>
         </div>
       </div>

@@ -23,7 +23,7 @@ export default function AdminHeader({ loading, onRefresh }: AdminHeaderProps) {
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div>
-            <Typography variant='h1' className="text-2xl font-bold">Aamantran Homestay</Typography>
+            <Typography variant='h1' className="text-2xl font-bold">Aamantran Stay</Typography>
             <Typography variant='paragraph' className="text-sm text-gray-600">Admin Dashboard</Typography>
           </div>
           <div className="flex gap-4">

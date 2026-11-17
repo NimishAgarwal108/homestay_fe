@@ -18,7 +18,7 @@ const About = () => {
             About Aamantran
           </Typography>
           <Typography variant="paragraph" textColor="secondary" align="center">
-            A Boutique Homestay in the serene mountains of Uttarakhand
+            A Boutique Stay in the serene mountains of Uttarakhand
           </Typography>
         </div>
 
@@ -29,7 +29,7 @@ const About = () => {
            <div className="flex items-center gap-2">
           <Image
             src={URL.LOGO}
-            alt="Homestay Logo"
+            alt="Stay Logo"
             width={300}
             height={300}
             priority
@@ -56,7 +56,7 @@ const About = () => {
 >
   Welcome to{" "}
   <span className="font-semibold text-[#7570BC]">
-    Aamantran – A Boutique Homestay
+    Aamantran – A Boutique Stay
   </span>
   , nestled amidst the breathtaking mountain landscapes of Uttarakhand.
   Located in Khurad, Rudraprayag, Aamantran offers a peaceful retreat for
