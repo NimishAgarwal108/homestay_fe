@@ -32,7 +32,7 @@ const Navigation: React.FC<NavigationProps> = ({
             priority
           />
           <Typography variant="brand" textColor="white" weight="bold" className="hover:text-black cursor-pointer">
-            A Boutique stay
+            Aamantran-A Boutique stay
           </Typography>
         </div>
 
